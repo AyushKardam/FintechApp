@@ -214,7 +214,7 @@ const Loan = () => {
         {step === 2 && <>
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                <h3 className="text-lg font-semibold mb-4 text-gray-100">
                   {isEnglish ? 'Loan Application' : 'लोन आवेदन • Loan Application'}
                 </h3>
                 
