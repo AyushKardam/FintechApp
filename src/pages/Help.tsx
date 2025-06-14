@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, MessageCircle, PlayCircle, BookOpen, Users, Gift, Star, Phone, Video, HelpCircle, Shield, TrendingUp, Zap } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
-
 const Help = () => {
   const navigate = useNavigate();
   const {
@@ -237,7 +236,7 @@ const Help = () => {
                 </h3>
                 <div className="space-y-3">
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-100">
+                    <p className="font-medium text-gray-950">
                       {isEnglish ? 'How long does loan approval take?' : 'लोन की अप्रूवल में कितना समय लगता है?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
@@ -245,7 +244,7 @@ const Help = () => {
                     </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-100">
+                    <p className="font-medium text-gray-950">
                       {isEnglish ? 'Is my information secure?' : 'क्या मेरी जानकारी सुरक्षित है?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
@@ -253,7 +252,7 @@ const Help = () => {
                     </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-100">
+                    <p className="font-medium text-gray-950">
                       {isEnglish ? 'How to pay EMI?' : 'EMI कैसे भरें?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
@@ -415,5 +414,4 @@ const Help = () => {
       </div>
     </div>;
 };
-
 export default Help;
