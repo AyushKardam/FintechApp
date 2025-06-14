@@ -19,44 +19,47 @@ import {
   TrendingUp,
   Zap
 } from 'lucide-react';
+import { useApp } from '@/contexts/AppContext';
 
 const Help = () => {
   const navigate = useNavigate();
+  const { selectedLanguage } = useApp();
+  const isEnglish = selectedLanguage.code === 'en';
   const [activeTab, setActiveTab] = useState('learn'); // learn, support, referral
 
   const educationalVideos = [
     {
       id: 1,
-      title: 'पैसे क्यों बचाने चाहिए?',
-      subtitle: 'Why Save Money?',
-      duration: '2 मिनट',
+      title: isEnglish ? 'Why Save Money?' : 'पैसे क्यों बचाने चाहिए?',
+      subtitle: isEnglish ? '' : 'Why Save Money?',
+      duration: isEnglish ? '2 min' : '2 मिनट',
       thumbnail: '💰',
       category: 'savings',
       completed: true
     },
     {
       id: 2,
-      title: 'लोन कैसे वापस करें?',
-      subtitle: 'How to Repay Loans?',
-      duration: '3 मिनट',
+      title: isEnglish ? 'How to Repay Loans?' : 'लोन कैसे वापस करें?',
+      subtitle: isEnglish ? '' : 'How to Repay Loans?',
+      duration: isEnglish ? '3 min' : '3 मिनट',
       thumbnail: '💳',
       category: 'loan',
       completed: false
     },
     {
       id: 3,
-      title: 'फ्रॉड से कैसे बचें?',
-      subtitle: 'Fraud Prevention',
-      duration: '4 मिनट',
+      title: isEnglish ? 'Fraud Prevention' : 'फ्रॉड से कैसे बचें?',
+      subtitle: isEnglish ? '' : 'Fraud Prevention',
+      duration: isEnglish ? '4 min' : '4 मिनट',
       thumbnail: '🔒',
       category: 'security',
       completed: false
     },
     {
       id: 4,
-      title: 'बीमा क्यों जरूरी है?',
-      subtitle: 'Why Insurance Matters?',
-      duration: '3 मिनट',
+      title: isEnglish ? 'Why Insurance Matters?' : 'बीमा क्यों जरूरी है?',
+      subtitle: isEnglish ? '' : 'Why Insurance Matters?',
+      duration: isEnglish ? '3 min' : '3 मिनट',
       thumbnail: '🛡️',
       category: 'insurance',
       completed: true
@@ -66,7 +69,7 @@ const Help = () => {
   const quizzes = [
     {
       id: 1,
-      title: 'बचत क्विज़',
+      title: isEnglish ? 'Savings Quiz' : 'बचत क्विज़',
       questions: 5,
       reward: 10,
       completed: true,
@@ -74,7 +77,7 @@ const Help = () => {
     },
     {
       id: 2,
-      title: 'लोन क्विज़',
+      title: isEnglish ? 'Loan Quiz' : 'लोन क्विज़',
       questions: 5,
       reward: 15,
       completed: false,
@@ -103,8 +106,12 @@ const Help = () => {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-gray-800">मदद केंद्र</h1>
-            <p className="text-sm text-gray-600">Help & Learning Center</p>
+            <h1 className="text-xl font-bold text-gray-800">
+              {isEnglish ? 'Help Center' : 'मदद केंद्र'}
+            </h1>
+            {!isEnglish && (
+              <p className="text-sm text-gray-600">Help & Learning Center</p>
+            )}
           </div>
         </div>
 
@@ -113,15 +120,23 @@ const Help = () => {
           <Card className="border-0 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
             <CardContent className="p-4 text-center">
               <MessageCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <p className="font-medium text-gray-800">WhatsApp चैट</p>
-              <p className="text-xs text-gray-600">तुरंत मदद</p>
+              <p className="font-medium text-gray-800">
+                {isEnglish ? 'WhatsApp Chat' : 'WhatsApp चैट'}
+              </p>
+              <p className="text-xs text-gray-600">
+                {isEnglish ? 'Instant Help' : 'तुरंत मदद'}
+              </p>
             </CardContent>
           </Card>
           <Card className="border-0 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
             <CardContent className="p-4 text-center">
               <Phone className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-              <p className="font-medium text-gray-800">कॉल करें</p>
-              <p className="text-xs text-gray-600">24x7 हेल्पलाइन</p>
+              <p className="font-medium text-gray-800">
+                {isEnglish ? 'Call Us' : 'कॉल करें'}
+              </p>
+              <p className="text-xs text-gray-600">
+                {isEnglish ? '24x7 Helpline' : '24x7 हेल्पलाइन'}
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -134,7 +149,7 @@ const Help = () => {
             className={`flex-1 ${activeTab === 'learn' ? 'bg-orange-600 text-white' : 'text-gray-600'}`}
             onClick={() => setActiveTab('learn')}
           >
-            सीखें
+            {isEnglish ? 'Learn' : 'सीखें'}
           </Button>
           <Button
             variant={activeTab === 'support' ? 'default' : 'ghost'}
@@ -142,7 +157,7 @@ const Help = () => {
             className={`flex-1 ${activeTab === 'support' ? 'bg-orange-600 text-white' : 'text-gray-600'}`}
             onClick={() => setActiveTab('support')}
           >
-            सहायता
+            {isEnglish ? 'Support' : 'सहायता'}
           </Button>
           <Button
             variant={activeTab === 'referral' ? 'default' : 'ghost'}
@@ -150,7 +165,7 @@ const Help = () => {
             className={`flex-1 ${activeTab === 'referral' ? 'bg-orange-600 text-white' : 'text-gray-600'}`}
             onClick={() => setActiveTab('referral')}
           >
-            रेफरल
+            {isEnglish ? 'Referral' : 'रेफरल'}
           </Button>
         </div>
 
@@ -161,7 +176,7 @@ const Help = () => {
             <div>
               <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
                 <BookOpen className="w-5 h-5 mr-2" />
-                शिक्षा वीडियो • Educational Videos
+                {isEnglish ? 'Educational Videos' : 'शिक्षा वीडियो • Educational Videos'}
               </h3>
               <div className="space-y-3">
                 {educationalVideos.map((video) => (
@@ -183,7 +198,9 @@ const Help = () => {
                               <Badge className="bg-green-100 text-green-700 text-xs">✓</Badge>
                             )}
                           </div>
-                          <p className="text-sm text-gray-600">{video.subtitle}</p>
+                          {!isEnglish && video.subtitle && (
+                            <p className="text-sm text-gray-600">{video.subtitle}</p>
+                          )}
                           <p className="text-xs text-orange-600">{video.duration}</p>
                         </div>
                       </div>
@@ -197,7 +214,7 @@ const Help = () => {
             <div>
               <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
                 <HelpCircle className="w-5 h-5 mr-2" />
-                क्विज़ • Quiz & Rewards
+                {isEnglish ? 'Quiz & Rewards' : 'क्विज़ • Quiz & Rewards'}
               </h3>
               <div className="space-y-3">
                 {quizzes.map((quiz) => (
@@ -206,9 +223,13 @@ const Help = () => {
                       <div className="flex items-center justify-between">
                         <div>
                           <h4 className="font-medium text-gray-800">{quiz.title}</h4>
-                          <p className="text-sm text-gray-600">{quiz.questions} सवाल</p>
+                          <p className="text-sm text-gray-600">
+                            {quiz.questions} {isEnglish ? 'questions' : 'सवाल'}
+                          </p>
                           {quiz.completed && (
-                            <p className="text-sm text-green-600">स्कोर: {quiz.score}/{quiz.questions}</p>
+                            <p className="text-sm text-green-600">
+                              {isEnglish ? 'Score' : 'स्कोर'}: {quiz.score}/{quiz.questions}
+                            </p>
                           )}
                         </div>
                         <div className="text-right">
@@ -220,7 +241,10 @@ const Help = () => {
                             size="sm" 
                             className={quiz.completed ? "bg-green-600 hover:bg-green-700" : "bg-orange-600 hover:bg-orange-700"}
                           >
-                            {quiz.completed ? 'फिर से करें' : 'शुरू करें'}
+                            {quiz.completed 
+                              ? (isEnglish ? 'Retake' : 'फिर से करें')
+                              : (isEnglish ? 'Start' : 'शुरू करें')
+                            }
                           </Button>
                         </div>
                       </div>
@@ -233,13 +257,20 @@ const Help = () => {
             {/* Tips */}
             <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 to-purple-50">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">💡 आज की टिप</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  💡 {isEnglish ? "Today's Tip" : 'आज की टिप'}
+                </h3>
                 <p className="text-gray-700 mb-3">
-                  "हर दिन ₹20 बचाएं तो साल में ₹7,300 जमा होंगे। छोटी बचत, बड़ा फायदा!"
+                  {isEnglish 
+                    ? "Save ₹20 daily and you'll have ₹7,300 in a year. Small savings, big benefits!"
+                    : '"हर दिन ₹20 बचाएं तो साल में ₹7,300 जमा होंगे। छोटी बचत, बड़ा फायदा!"'
+                  }
                 </p>
-                <p className="text-sm text-gray-600">
-                  Save ₹20 daily = ₹7,300 yearly. Small savings, big benefits!
-                </p>
+                {!isEnglish && (
+                  <p className="text-sm text-gray-600">
+                    Save ₹20 daily = ₹7,300 yearly. Small savings, big benefits!
+                  </p>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -250,19 +281,21 @@ const Help = () => {
           <div className="space-y-4">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">तुरंत मदद • Quick Help</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {isEnglish ? 'Quick Help' : 'तुरंत मदद • Quick Help'}
+                </h3>
                 <div className="space-y-3">
                   <Button className="w-full bg-green-600 hover:bg-green-700 h-12 justify-start">
                     <MessageCircle className="w-5 h-5 mr-3" />
-                    WhatsApp पर चैट करें
+                    {isEnglish ? 'Chat on WhatsApp' : 'WhatsApp पर चैट करें'}
                   </Button>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 h-12 justify-start">
                     <Phone className="w-5 h-5 mr-3" />
-                    हेल्पलाइन कॉल करें
+                    {isEnglish ? 'Call Helpline' : 'हेल्पलाइन कॉल करें'}
                   </Button>
                   <Button className="w-full bg-purple-600 hover:bg-purple-700 h-12 justify-start">
                     <Video className="w-5 h-5 mr-3" />
-                    वीडियो कॉल बुक करें
+                    {isEnglish ? 'Book Video Call' : 'वीडियो कॉल बुक करें'}
                   </Button>
                 </div>
               </CardContent>
@@ -270,19 +303,51 @@ const Help = () => {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">आम सवाल • FAQs</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {isEnglish ? 'FAQs' : 'आम सवाल • FAQs'}
+                </h3>
                 <div className="space-y-3">
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-800">लोन की अप्रूवल में कितना समय लगता है?</p>
-                    <p className="text-sm text-gray-600 mt-1">24-48 घंटे में अप्रूवल मिल जाता है।</p>
+                    <p className="font-medium text-gray-800">
+                      {isEnglish 
+                        ? 'How long does loan approval take?'
+                        : 'लोन की अप्रूवल में कितना समय लगता है?'
+                      }
+                    </p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {isEnglish 
+                        ? 'Approval is received within 24-48 hours.'
+                        : '24-48 घंटे में अप्रूवल मिल जाता है।'
+                      }
+                    </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-800">क्या मेरी जानकारी सुरक्षित है?</p>
-                    <p className="text-sm text-gray-600 mt-1">हाँ, हम बैंक लेवल की सिक्योरिटी इस्तेमाल करते हैं।</p>
+                    <p className="font-medium text-gray-800">
+                      {isEnglish 
+                        ? 'Is my information secure?'
+                        : 'क्या मेरी जानकारी सुरक्षित है?'
+                      }
+                    </p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {isEnglish 
+                        ? 'Yes, we use bank-level security.'
+                        : 'हाँ, हम बैंक लेवल की सिक्योरिटी इस्तेमाल करते हैं।'
+                      }
+                    </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-800">EMI कैसे भरें?</p>
-                    <p className="text-sm text-gray-600 mt-1">UPI, नेट बैंकिंग या ऑटो-डेबिट से भर सकते हैं।</p>
+                    <p className="font-medium text-gray-800">
+                      {isEnglish 
+                        ? 'How to pay EMI?'
+                        : 'EMI कैसे भरें?'
+                      }
+                    </p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {isEnglish 
+                        ? 'You can pay via UPI, net banking, or auto-debit.'
+                        : 'UPI, नेट बैंकिंग या ऑटो-डेबिट से भर सकते हैं।'
+                      }
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -290,26 +355,34 @@ const Help = () => {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">एजेंट से मिलें</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {isEnglish ? 'Meet Agent' : 'एजेंट से मिलें'}
+                </h3>
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
                     <span className="text-xl">👩‍💼</span>
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-gray-800">प्रिया शर्मा</p>
-                    <p className="text-sm text-gray-600">आपके एरिया की एजेंट</p>
+                    <p className="font-medium text-gray-800">
+                      {isEnglish ? 'Priya Sharma' : 'प्रिया शर्मा'}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {isEnglish ? 'Your Area Agent' : 'आपके एरिया की एजेंट'}
+                    </p>
                     <div className="flex items-center space-x-1 mt-1">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm text-gray-600">4.8 (245 कस्टमर्स)</span>
+                      <span className="text-sm text-gray-600">
+                        4.8 ({isEnglish ? '245 customers' : '245 कस्टमर्स'})
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                    कॉल करें
+                    {isEnglish ? 'Call' : 'कॉल करें'}
                   </Button>
                   <Button size="sm" variant="outline">
-                    मिलने का समय
+                    {isEnglish ? 'Schedule Meeting' : 'मिलने का समय'}
                   </Button>
                 </div>
               </CardContent>
@@ -324,18 +397,26 @@ const Help = () => {
             <Card className="border-0 shadow-lg bg-gradient-to-r from-green-600 to-blue-600">
               <CardContent className="p-6 text-white">
                 <div className="text-center mb-4">
-                  <h3 className="text-lg font-semibold mb-2">रेफरल कमाई</h3>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {isEnglish ? 'Referral Earnings' : 'रेफरल कमाई'}
+                  </h3>
                   <div className="text-3xl font-bold">₹{referralStats.totalEarnings}</div>
-                  <p className="text-green-100 text-sm">कुल कमाई</p>
+                  <p className="text-green-100 text-sm">
+                    {isEnglish ? 'Total Earnings' : 'कुल कमाई'}
+                  </p>
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-center">
                   <div>
                     <div className="text-xl font-bold">{referralStats.successfulReferrals}</div>
-                    <p className="text-xs text-green-100">सफल रेफरल</p>
+                    <p className="text-xs text-green-100">
+                      {isEnglish ? 'Successful Referrals' : 'सफल रेफरल'}
+                    </p>
                   </div>
                   <div>
                     <div className="text-xl font-bold">₹{referralStats.currentMonthEarnings}</div>
-                    <p className="text-xs text-green-100">इस महीने</p>
+                    <p className="text-xs text-green-100">
+                      {isEnglish ? 'This Month' : 'इस महीने'}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -344,23 +425,29 @@ const Help = () => {
             {/* Referral Actions */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">दोस्तों को इनवाइट करें</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {isEnglish ? 'Invite Friends' : 'दोस्तों को इनवाइट करें'}
+                </h3>
                 <div className="space-y-3">
                   <Button className="w-full bg-green-600 hover:bg-green-700 h-12">
                     <Users className="w-5 h-5 mr-2" />
-                    WhatsApp पर शेयर करें
+                    {isEnglish ? 'Share on WhatsApp' : 'WhatsApp पर शेयर करें'}
                   </Button>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 h-12">
                     <MessageCircle className="w-5 h-5 mr-2" />
-                    SMS भेजें
+                    {isEnglish ? 'Send SMS' : 'SMS भेजें'}
                   </Button>
                 </div>
                 
                 <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600 mb-2">आपका रेफरल कोड:</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {isEnglish ? 'Your referral code:' : 'आपका रेफरल कोड:'}
+                  </p>
                   <div className="flex items-center justify-between bg-white p-2 rounded border">
                     <span className="font-mono font-bold">PAISA{referralStats.totalReferrals}ABC</span>
-                    <Button size="sm" variant="outline">कॉपी</Button>
+                    <Button size="sm" variant="outline">
+                      {isEnglish ? 'Copy' : 'कॉपी'}
+                    </Button>
                   </div>
                 </div>
               </CardContent>
@@ -369,12 +456,18 @@ const Help = () => {
             {/* Referral Rewards */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">रेफरल रिवार्ड्स</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {isEnglish ? 'Referral Rewards' : 'रेफरल रिवार्ड्स'}
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">नया यूजर जॉइन करे</p>
-                      <p className="text-sm text-gray-600">रजिस्ट्रेशन के बाद</p>
+                      <p className="font-medium text-gray-800">
+                        {isEnglish ? 'New user joins' : 'नया यूजर जॉइन करे'}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {isEnglish ? 'After registration' : 'रजिस्ट्रेशन के बाद'}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-green-600">₹25</p>
@@ -382,8 +475,12 @@ const Help = () => {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">पहला लोन ले</p>
-                      <p className="text-sm text-gray-600">लोन अप्रूवल पर</p>
+                      <p className="font-medium text-gray-800">
+                        {isEnglish ? 'Takes first loan' : 'पहला लोन ले'}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {isEnglish ? 'On loan approval' : 'लोन अप्रूवल पर'}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-green-600">₹50</p>
@@ -391,8 +488,12 @@ const Help = () => {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">10 दोस्त जॉइन करें</p>
-                      <p className="text-sm text-gray-600">माइलस्टोन बोनस</p>
+                      <p className="font-medium text-gray-800">
+                        {isEnglish ? '10 friends join' : '10 दोस्त जॉइन करें'}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {isEnglish ? 'Milestone bonus' : 'माइलस्टोन बोनस'}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-green-600">₹200</p>
