@@ -1,117 +1,84 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  ArrowLeft, 
-  MessageCircle,
-  PlayCircle,
-  BookOpen,
-  Users,
-  Gift,
-  Star,
-  Phone,
-  Video,
-  HelpCircle,
-  Shield,
-  TrendingUp,
-  Zap
-} from 'lucide-react';
+import { ArrowLeft, MessageCircle, PlayCircle, BookOpen, Users, Gift, Star, Phone, Video, HelpCircle, Shield, TrendingUp, Zap } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
-
 const Help = () => {
   const navigate = useNavigate();
-  const { selectedLanguage } = useApp();
+  const {
+    selectedLanguage
+  } = useApp();
   const isEnglish = selectedLanguage.code === 'en';
   const [activeTab, setActiveTab] = useState('learn'); // learn, support, referral
 
-  const educationalVideos = [
-    {
-      id: 1,
-      title: isEnglish ? 'Why Save Money?' : 'पैसे क्यों बचाने चाहिए?',
-      subtitle: isEnglish ? '' : 'Why Save Money?',
-      duration: isEnglish ? '2 min' : '2 मिनट',
-      thumbnail: '💰',
-      category: 'savings',
-      completed: true
-    },
-    {
-      id: 2,
-      title: isEnglish ? 'How to Repay Loans?' : 'लोन कैसे वापस करें?',
-      subtitle: isEnglish ? '' : 'How to Repay Loans?',
-      duration: isEnglish ? '3 min' : '3 मिनट',
-      thumbnail: '💳',
-      category: 'loan',
-      completed: false
-    },
-    {
-      id: 3,
-      title: isEnglish ? 'Fraud Prevention' : 'फ्रॉड से कैसे बचें?',
-      subtitle: isEnglish ? '' : 'Fraud Prevention',
-      duration: isEnglish ? '4 min' : '4 मिनट',
-      thumbnail: '🔒',
-      category: 'security',
-      completed: false
-    },
-    {
-      id: 4,
-      title: isEnglish ? 'Why Insurance Matters?' : 'बीमा क्यों जरूरी है?',
-      subtitle: isEnglish ? '' : 'Why Insurance Matters?',
-      duration: isEnglish ? '3 min' : '3 मिनट',
-      thumbnail: '🛡️',
-      category: 'insurance',
-      completed: true
-    }
-  ];
-
-  const quizzes = [
-    {
-      id: 1,
-      title: isEnglish ? 'Savings Quiz' : 'बचत क्विज़',
-      questions: 5,
-      reward: 10,
-      completed: true,
-      score: 4
-    },
-    {
-      id: 2,
-      title: isEnglish ? 'Loan Quiz' : 'लोन क्विज़',
-      questions: 5,
-      reward: 15,
-      completed: false,
-      score: null
-    }
-  ];
-
+  const educationalVideos = [{
+    id: 1,
+    title: isEnglish ? 'Why Save Money?' : 'पैसे क्यों बचाने चाहिए?',
+    subtitle: isEnglish ? '' : 'Why Save Money?',
+    duration: isEnglish ? '2 min' : '2 मिनट',
+    thumbnail: '💰',
+    category: 'savings',
+    completed: true
+  }, {
+    id: 2,
+    title: isEnglish ? 'How to Repay Loans?' : 'लोन कैसे वापस करें?',
+    subtitle: isEnglish ? '' : 'How to Repay Loans?',
+    duration: isEnglish ? '3 min' : '3 मिनट',
+    thumbnail: '💳',
+    category: 'loan',
+    completed: false
+  }, {
+    id: 3,
+    title: isEnglish ? 'Fraud Prevention' : 'फ्रॉड से कैसे बचें?',
+    subtitle: isEnglish ? '' : 'Fraud Prevention',
+    duration: isEnglish ? '4 min' : '4 मिनट',
+    thumbnail: '🔒',
+    category: 'security',
+    completed: false
+  }, {
+    id: 4,
+    title: isEnglish ? 'Why Insurance Matters?' : 'बीमा क्यों जरूरी है?',
+    subtitle: isEnglish ? '' : 'Why Insurance Matters?',
+    duration: isEnglish ? '3 min' : '3 मिनट',
+    thumbnail: '🛡️',
+    category: 'insurance',
+    completed: true
+  }];
+  const quizzes = [{
+    id: 1,
+    title: isEnglish ? 'Savings Quiz' : 'बचत क्विज़',
+    questions: 5,
+    reward: 10,
+    completed: true,
+    score: 4
+  }, {
+    id: 2,
+    title: isEnglish ? 'Loan Quiz' : 'लोन क्विज़',
+    questions: 5,
+    reward: 15,
+    completed: false,
+    score: null
+  }];
   const [referralStats] = useState({
     totalReferrals: 12,
     successfulReferrals: 8,
     totalEarnings: 400,
     currentMonthEarnings: 150
   });
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 p-6 pb-20">
+  return <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 p-6 pb-20">
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="flex items-center space-x-4 mb-6">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => navigate('/dashboard')}
-            className="rounded-full"
-          >
+          <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="rounded-full">
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
             <h1 className="text-xl font-bold text-gray-800">
               {isEnglish ? 'Help Center' : 'मदद केंद्र'}
             </h1>
-            {!isEnglish && (
-              <p className="text-sm text-gray-600">Help & Learning Center</p>
-            )}
+            {!isEnglish && <p className="text-sm text-gray-600">Help & Learning Center</p>}
           </div>
         </div>
 
@@ -120,10 +87,10 @@ const Help = () => {
           <Card className="border-0 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
             <CardContent className="p-4 text-center">
               <MessageCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <p className="font-medium text-gray-800">
+              <p className="font-medium text-gray-100">
                 {isEnglish ? 'WhatsApp Chat' : 'WhatsApp चैट'}
               </p>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-gray-300">
                 {isEnglish ? 'Instant Help' : 'तुरंत मदद'}
               </p>
             </CardContent>
@@ -131,10 +98,10 @@ const Help = () => {
           <Card className="border-0 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
             <CardContent className="p-4 text-center">
               <Phone className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-              <p className="font-medium text-gray-800">
+              <p className="font-medium text-gray-100">
                 {isEnglish ? 'Call Us' : 'कॉल करें'}
               </p>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-gray-300">
                 {isEnglish ? '24x7 Helpline' : '24x7 हेल्पलाइन'}
               </p>
             </CardContent>
@@ -143,35 +110,19 @@ const Help = () => {
 
         {/* Tab Navigation */}
         <div className="flex bg-white rounded-lg p-1 mb-6 shadow-sm">
-          <Button
-            variant={activeTab === 'learn' ? 'default' : 'ghost'}
-            size="sm"
-            className={`flex-1 ${activeTab === 'learn' ? 'bg-orange-600 text-white' : 'text-gray-600'}`}
-            onClick={() => setActiveTab('learn')}
-          >
+          <Button variant={activeTab === 'learn' ? 'default' : 'ghost'} size="sm" className={`flex-1 ${activeTab === 'learn' ? 'bg-orange-600 text-white' : 'text-gray-600'}`} onClick={() => setActiveTab('learn')}>
             {isEnglish ? 'Learn' : 'सीखें'}
           </Button>
-          <Button
-            variant={activeTab === 'support' ? 'default' : 'ghost'}
-            size="sm"
-            className={`flex-1 ${activeTab === 'support' ? 'bg-orange-600 text-white' : 'text-gray-600'}`}
-            onClick={() => setActiveTab('support')}
-          >
+          <Button variant={activeTab === 'support' ? 'default' : 'ghost'} size="sm" className={`flex-1 ${activeTab === 'support' ? 'bg-orange-600 text-white' : 'text-gray-600'}`} onClick={() => setActiveTab('support')}>
             {isEnglish ? 'Support' : 'सहायता'}
           </Button>
-          <Button
-            variant={activeTab === 'referral' ? 'default' : 'ghost'}
-            size="sm"
-            className={`flex-1 ${activeTab === 'referral' ? 'bg-orange-600 text-white' : 'text-gray-600'}`}
-            onClick={() => setActiveTab('referral')}
-          >
+          <Button variant={activeTab === 'referral' ? 'default' : 'ghost'} size="sm" className={`flex-1 ${activeTab === 'referral' ? 'bg-orange-600 text-white' : 'text-gray-600'}`} onClick={() => setActiveTab('referral')}>
             {isEnglish ? 'Referral' : 'रेफरल'}
           </Button>
         </div>
 
         {/* Learn Tab */}
-        {activeTab === 'learn' && (
-          <div className="space-y-6">
+        {activeTab === 'learn' && <div className="space-y-6">
             {/* Educational Videos */}
             <div>
               <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
@@ -179,8 +130,7 @@ const Help = () => {
                 {isEnglish ? 'Educational Videos' : 'शिक्षा वीडियो • Educational Videos'}
               </h3>
               <div className="space-y-3">
-                {educationalVideos.map((video) => (
-                  <Card key={video.id} className="border-0 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                {educationalVideos.map(video => <Card key={video.id} className="border-0 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
                     <CardContent className="p-4">
                       <div className="flex items-center space-x-4">
                         <div className="relative">
@@ -193,20 +143,15 @@ const Help = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
-                            <h4 className="font-medium text-gray-800">{video.title}</h4>
-                            {video.completed && (
-                              <Badge className="bg-green-100 text-green-700 text-xs">✓</Badge>
-                            )}
+                            <h4 className="font-medium text-gray-100">{video.title}</h4>
+                            {video.completed && <Badge className="bg-green-100 text-green-700 text-xs">✓</Badge>}
                           </div>
-                          {!isEnglish && video.subtitle && (
-                            <p className="text-sm text-gray-600">{video.subtitle}</p>
-                          )}
+                          {!isEnglish && video.subtitle && <p className="text-sm text-gray-600">{video.subtitle}</p>}
                           <p className="text-xs text-orange-600">{video.duration}</p>
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </div>
 
@@ -217,40 +162,30 @@ const Help = () => {
                 {isEnglish ? 'Quiz & Rewards' : 'क्विज़ • Quiz & Rewards'}
               </h3>
               <div className="space-y-3">
-                {quizzes.map((quiz) => (
-                  <Card key={quiz.id} className="border-0 shadow-lg">
+                {quizzes.map(quiz => <Card key={quiz.id} className="border-0 shadow-lg">
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="font-medium text-gray-800">{quiz.title}</h4>
+                          <h4 className="font-medium text-gray-100">{quiz.title}</h4>
                           <p className="text-sm text-gray-600">
                             {quiz.questions} {isEnglish ? 'questions' : 'सवाल'}
                           </p>
-                          {quiz.completed && (
-                            <p className="text-sm text-green-600">
+                          {quiz.completed && <p className="text-sm text-green-600">
                               {isEnglish ? 'Score' : 'स्कोर'}: {quiz.score}/{quiz.questions}
-                            </p>
-                          )}
+                            </p>}
                         </div>
                         <div className="text-right">
                           <div className="flex items-center space-x-1 mb-2">
                             <Gift className="w-4 h-4 text-orange-600" />
                             <span className="text-sm font-medium text-orange-600">₹{quiz.reward}</span>
                           </div>
-                          <Button 
-                            size="sm" 
-                            className={quiz.completed ? "bg-green-600 hover:bg-green-700" : "bg-orange-600 hover:bg-orange-700"}
-                          >
-                            {quiz.completed 
-                              ? (isEnglish ? 'Retake' : 'फिर से करें')
-                              : (isEnglish ? 'Start' : 'शुरू करें')
-                            }
+                          <Button size="sm" className={quiz.completed ? "bg-green-600 hover:bg-green-700" : "bg-orange-600 hover:bg-orange-700"}>
+                            {quiz.completed ? isEnglish ? 'Retake' : 'फिर से करें' : isEnglish ? 'Start' : 'शुरू करें'}
                           </Button>
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </div>
 
@@ -261,24 +196,17 @@ const Help = () => {
                   💡 {isEnglish ? "Today's Tip" : 'आज की टिप'}
                 </h3>
                 <p className="text-gray-700 mb-3">
-                  {isEnglish 
-                    ? "Save ₹20 daily and you'll have ₹7,300 in a year. Small savings, big benefits!"
-                    : '"हर दिन ₹20 बचाएं तो साल में ₹7,300 जमा होंगे। छोटी बचत, बड़ा फायदा!"'
-                  }
+                  {isEnglish ? "Save ₹20 daily and you'll have ₹7,300 in a year. Small savings, big benefits!" : '"हर दिन ₹20 बचाएं तो साल में ₹7,300 जमा होंगे। छोटी बचत, बड़ा फायदा!"'}
                 </p>
-                {!isEnglish && (
-                  <p className="text-sm text-gray-600">
+                {!isEnglish && <p className="text-sm text-gray-600">
                     Save ₹20 daily = ₹7,300 yearly. Small savings, big benefits!
-                  </p>
-                )}
+                  </p>}
               </CardContent>
             </Card>
-          </div>
-        )}
+          </div>}
 
         {/* Support Tab */}
-        {activeTab === 'support' && (
-          <div className="space-y-4">
+        {activeTab === 'support' && <div className="space-y-4">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
                 <h3 className="font-semibold text-gray-800 mb-4">
@@ -309,44 +237,26 @@ const Help = () => {
                 <div className="space-y-3">
                   <div className="p-3 bg-gray-50 rounded-lg">
                     <p className="font-medium text-gray-800">
-                      {isEnglish 
-                        ? 'How long does loan approval take?'
-                        : 'लोन की अप्रूवल में कितना समय लगता है?'
-                      }
+                      {isEnglish ? 'How long does loan approval take?' : 'लोन की अप्रूवल में कितना समय लगता है?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
-                      {isEnglish 
-                        ? 'Approval is received within 24-48 hours.'
-                        : '24-48 घंटे में अप्रूवल मिल जाता है।'
-                      }
+                      {isEnglish ? 'Approval is received within 24-48 hours.' : '24-48 घंटे में अप्रूवल मिल जाता है।'}
                     </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
                     <p className="font-medium text-gray-800">
-                      {isEnglish 
-                        ? 'Is my information secure?'
-                        : 'क्या मेरी जानकारी सुरक्षित है?'
-                      }
+                      {isEnglish ? 'Is my information secure?' : 'क्या मेरी जानकारी सुरक्षित है?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
-                      {isEnglish 
-                        ? 'Yes, we use bank-level security.'
-                        : 'हाँ, हम बैंक लेवल की सिक्योरिटी इस्तेमाल करते हैं।'
-                      }
+                      {isEnglish ? 'Yes, we use bank-level security.' : 'हाँ, हम बैंक लेवल की सिक्योरिटी इस्तेमाल करते हैं।'}
                     </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
                     <p className="font-medium text-gray-800">
-                      {isEnglish 
-                        ? 'How to pay EMI?'
-                        : 'EMI कैसे भरें?'
-                      }
+                      {isEnglish ? 'How to pay EMI?' : 'EMI कैसे भरें?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
-                      {isEnglish 
-                        ? 'You can pay via UPI, net banking, or auto-debit.'
-                        : 'UPI, नेट बैंकिंग या ऑटो-डेबिट से भर सकते हैं।'
-                      }
+                      {isEnglish ? 'You can pay via UPI, net banking, or auto-debit.' : 'UPI, नेट बैंकिंग या ऑटो-डेबिट से भर सकते हैं।'}
                     </p>
                   </div>
                 </div>
@@ -387,12 +297,10 @@ const Help = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        )}
+          </div>}
 
         {/* Referral Tab */}
-        {activeTab === 'referral' && (
-          <div className="space-y-4">
+        {activeTab === 'referral' && <div className="space-y-4">
             {/* Referral Stats */}
             <Card className="border-0 shadow-lg bg-gradient-to-r from-green-600 to-blue-600">
               <CardContent className="p-6 text-white">
@@ -502,11 +410,8 @@ const Help = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        )}
+          </div>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Help;
