@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
+import LanguageSelector from '@/components/LanguageSelector';
 
 const Insurance = () => {
   const { user } = useApp();
@@ -75,6 +77,7 @@ const Insurance = () => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
+            <LanguageSelector />
             <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
               <Bell className="w-5 h-5" />
             </Button>
@@ -170,6 +173,6 @@ const Insurance = () => {
 export default Insurance;
 
 // Mock components for demonstration purposes
-const Bell = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell"><path d="M6 8a5 5 0 0 1 12 0c0 7 3 10 3 10H3s3-3 3-10"/><path d="M10.5 17.5a.5.5 0 0 1 3 0"/></svg>;
-const User = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
-const TrendingUp = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trending-up"><path d="M3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>;
+const Bell = ({ className }: { className?: string }) => <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a5 5 0 0 1 12 0c0 7 3 10 3 10H3s3-3 3-10"/><path d="M10.5 17.5a.5.5 0 0 1 3 0"/></svg>;
+const User = ({ className }: { className?: string }) => <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+const TrendingUp = ({ className }: { className?: string }) => <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>;
