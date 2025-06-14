@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, MessageCircle, PlayCircle, BookOpen, Users, Gift, Star, Phone, Video, HelpCircle, Shield, TrendingUp, Zap } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
+
 const Help = () => {
   const navigate = useNavigate();
   const {
@@ -75,7 +76,7 @@ const Help = () => {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-gray-800">
+            <h1 className="text-xl font-bold text-gray-100">
               {isEnglish ? 'Help Center' : 'मदद केंद्र'}
             </h1>
             {!isEnglish && <p className="text-sm text-gray-600">Help & Learning Center</p>}
@@ -125,7 +126,7 @@ const Help = () => {
         {activeTab === 'learn' && <div className="space-y-6">
             {/* Educational Videos */}
             <div>
-              <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
+              <h3 className="font-semibold text-gray-100 mb-4 flex items-center">
                 <BookOpen className="w-5 h-5 mr-2" />
                 {isEnglish ? 'Educational Videos' : 'शिक्षा वीडियो • Educational Videos'}
               </h3>
@@ -157,7 +158,7 @@ const Help = () => {
 
             {/* Quizzes */}
             <div>
-              <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
+              <h3 className="font-semibold text-gray-100 mb-4 flex items-center">
                 <HelpCircle className="w-5 h-5 mr-2" />
                 {isEnglish ? 'Quiz & Rewards' : 'क्विज़ • Quiz & Rewards'}
               </h3>
@@ -192,7 +193,7 @@ const Help = () => {
             {/* Tips */}
             <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 to-purple-50">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">
+                <h3 className="font-semibold text-gray-100 mb-4">
                   💡 {isEnglish ? "Today's Tip" : 'आज की टिप'}
                 </h3>
                 <p className="text-gray-700 mb-3">
@@ -209,7 +210,7 @@ const Help = () => {
         {activeTab === 'support' && <div className="space-y-4">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">
+                <h3 className="font-semibold text-gray-100 mb-4">
                   {isEnglish ? 'Quick Help' : 'तुरंत मदद • Quick Help'}
                 </h3>
                 <div className="space-y-3">
@@ -231,12 +232,12 @@ const Help = () => {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">
+                <h3 className="font-semibold text-gray-100 mb-4">
                   {isEnglish ? 'FAQs' : 'आम सवाल • FAQs'}
                 </h3>
                 <div className="space-y-3">
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-100">
                       {isEnglish ? 'How long does loan approval take?' : 'लोन की अप्रूवल में कितना समय लगता है?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
@@ -244,7 +245,7 @@ const Help = () => {
                     </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-100">
                       {isEnglish ? 'Is my information secure?' : 'क्या मेरी जानकारी सुरक्षित है?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
@@ -252,7 +253,7 @@ const Help = () => {
                     </p>
                   </div>
                   <div className="p-3 bg-gray-50 rounded-lg">
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-100">
                       {isEnglish ? 'How to pay EMI?' : 'EMI कैसे भरें?'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
@@ -265,7 +266,7 @@ const Help = () => {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">
+                <h3 className="font-semibold text-gray-100 mb-4">
                   {isEnglish ? 'Meet Agent' : 'एजेंट से मिलें'}
                 </h3>
                 <div className="flex items-center space-x-4 mb-4">
@@ -273,7 +274,7 @@ const Help = () => {
                     <span className="text-xl">👩‍💼</span>
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-100">
                       {isEnglish ? 'Priya Sharma' : 'प्रिया शर्मा'}
                     </p>
                     <p className="text-sm text-gray-600">
@@ -333,7 +334,7 @@ const Help = () => {
             {/* Referral Actions */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">
+                <h3 className="font-semibold text-gray-100 mb-4">
                   {isEnglish ? 'Invite Friends' : 'दोस्तों को इनवाइट करें'}
                 </h3>
                 <div className="space-y-3">
@@ -364,13 +365,13 @@ const Help = () => {
             {/* Referral Rewards */}
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">
+                <h3 className="font-semibold text-gray-100 mb-4">
                   {isEnglish ? 'Referral Rewards' : 'रेफरल रिवार्ड्स'}
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">
+                      <p className="font-medium text-gray-100">
                         {isEnglish ? 'New user joins' : 'नया यूजर जॉइन करे'}
                       </p>
                       <p className="text-sm text-gray-600">
@@ -383,7 +384,7 @@ const Help = () => {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">
+                      <p className="font-medium text-gray-100">
                         {isEnglish ? 'Takes first loan' : 'पहला लोन ले'}
                       </p>
                       <p className="text-sm text-gray-600">
@@ -396,7 +397,7 @@ const Help = () => {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">
+                      <p className="font-medium text-gray-100">
                         {isEnglish ? '10 friends join' : '10 दोस्त जॉइन करें'}
                       </p>
                       <p className="text-sm text-gray-600">
@@ -414,4 +415,5 @@ const Help = () => {
       </div>
     </div>;
 };
+
 export default Help;
