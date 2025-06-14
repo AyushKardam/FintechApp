@@ -192,7 +192,7 @@ const Help = () => {
             {/* Tips */}
             <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-50 to-purple-50">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-100 mb-4">
+                <h3 className="font-semibold mb-4 text-gray-950">
                   💡 {isEnglish ? "Today's Tip" : 'आज की टिप'}
                 </h3>
                 <p className="text-gray-700 mb-3">
