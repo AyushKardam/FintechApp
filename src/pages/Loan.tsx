@@ -1,25 +1,17 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { 
-  ArrowLeft, 
-  CreditCard, 
-  TrendingUp, 
-  Calendar,
-  CheckCircle,
-  AlertCircle,
-  Smartphone,
-  Activity
-} from 'lucide-react';
+import { ArrowLeft, CreditCard, TrendingUp, Calendar, CheckCircle, AlertCircle, Smartphone, Activity } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
-
 const Loan = () => {
   const navigate = useNavigate();
-  const { user, selectedLanguage } = useApp();
+  const {
+    user,
+    selectedLanguage
+  } = useApp();
   const isEnglish = selectedLanguage.code === 'en';
   const [loanAmount, setLoanAmount] = useState(5000);
   const [selectedTenure, setSelectedTenure] = useState(6);
@@ -28,63 +20,48 @@ const Loan = () => {
   const eligibilityScore = 725;
   const maxLoanAmount = 20000;
   const minLoanAmount = 2000;
-
-  const tenureOptions = [
-    { 
-      months: 3, 
-      emi: Math.round(loanAmount / 3), 
-      label: isEnglish ? '3 Months' : '3 महीने' 
-    },
-    { 
-      months: 6, 
-      emi: Math.round(loanAmount / 6), 
-      label: isEnglish ? '6 Months' : '6 महीने' 
-    },
-    { 
-      months: 12, 
-      emi: Math.round(loanAmount / 12), 
-      label: isEnglish ? '12 Months' : '12 महीने' 
-    },
-  ];
-
-  const eligibilityFactors = [
-    { 
-      label: isEnglish ? 'Mobile Activity' : 'मोबाइल एक्टिविटी', 
-      score: 85, 
-      icon: Smartphone, 
-      status: 'good' 
-    },
-    { 
-      label: isEnglish ? 'UPI Transactions' : 'UPI ट्रांजेक्शन', 
-      score: 78, 
-      icon: CreditCard, 
-      status: 'good' 
-    },
-    { 
-      label: isEnglish ? 'Community Score' : 'कम्युनिटी स्कोर', 
-      score: 90, 
-      icon: TrendingUp, 
-      status: 'excellent' 
-    },
-    { 
-      label: isEnglish ? 'Regular Income' : 'रेगुलर इनकम', 
-      score: 70, 
-      icon: Activity, 
-      status: 'fair' 
-    },
-  ];
-
+  const tenureOptions = [{
+    months: 3,
+    emi: Math.round(loanAmount / 3),
+    label: isEnglish ? '3 Months' : '3 महीने'
+  }, {
+    months: 6,
+    emi: Math.round(loanAmount / 6),
+    label: isEnglish ? '6 Months' : '6 महीने'
+  }, {
+    months: 12,
+    emi: Math.round(loanAmount / 12),
+    label: isEnglish ? '12 Months' : '12 महीने'
+  }];
+  const eligibilityFactors = [{
+    label: isEnglish ? 'Mobile Activity' : 'मोबाइल एक्टिविटी',
+    score: 85,
+    icon: Smartphone,
+    status: 'good'
+  }, {
+    label: isEnglish ? 'UPI Transactions' : 'UPI ट्रांजेक्शन',
+    score: 78,
+    icon: CreditCard,
+    status: 'good'
+  }, {
+    label: isEnglish ? 'Community Score' : 'कम्युनिटी स्कोर',
+    score: 90,
+    icon: TrendingUp,
+    status: 'excellent'
+  }, {
+    label: isEnglish ? 'Regular Income' : 'रेगुलर इनकम',
+    score: 70,
+    icon: Activity,
+    status: 'fair'
+  }];
   const handleApplyLoan = () => {
     setStep(2);
   };
-
   const handleSubmitApplication = () => {
     setStep(3);
   };
-
   if (step === 3) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+    return <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8 mt-8">
             <div className="w-20 h-20 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
@@ -135,36 +112,22 @@ const Loan = () => {
           <Card className="border-0 shadow-sm bg-blue-50 mb-6">
             <CardContent className="p-4">
               <p className="text-sm text-blue-700 text-center">
-                {isEnglish 
-                  ? '💬 Our agent will contact you soon. You will get approval information in 24-48 hours.'
-                  : '💬 आपका एजेंट जल्द ही आपसे संपर्क करेगा। 24-48 घंटे में अप्रूवल की जानकारी मिलेगी।'
-                }
+                {isEnglish ? '💬 Our agent will contact you soon. You will get approval information in 24-48 hours.' : '💬 आपका एजेंट जल्द ही आपसे संपर्क करेगा। 24-48 घंटे में अप्रूवल की जानकारी मिलेगी।'}
               </p>
             </CardContent>
           </Card>
 
-          <Button 
-            onClick={() => navigate('/dashboard')} 
-            className="w-full bg-green-600 hover:bg-green-700 h-12"
-          >
+          <Button onClick={() => navigate('/dashboard')} className="w-full bg-green-600 hover:bg-green-700 h-12">
             {isEnglish ? 'Back to Home' : 'होम पर वापस जाएं'}
           </Button>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6 pb-20">
+  return <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6 pb-20">
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="flex items-center space-x-4 mb-6">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => step === 1 ? navigate('/dashboard') : setStep(1)}
-            className="rounded-full"
-          >
+          <Button variant="ghost" size="icon" onClick={() => step === 1 ? navigate('/dashboard') : setStep(1)} className="rounded-full">
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
@@ -175,13 +138,12 @@ const Loan = () => {
           </div>
         </div>
 
-        {step === 1 && (
-          <>
+        {step === 1 && <>
             {/* Eligibility Card */}
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
                 <div className="text-center mb-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-100">
                     {isEnglish ? 'Your Eligibility' : 'आपकी योग्यता • Your Eligibility'}
                   </h3>
                   <div className="w-20 h-20 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
@@ -196,21 +158,16 @@ const Loan = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {eligibilityFactors.map((factor, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  {eligibilityFactors.map((factor, index) => <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <factor.icon className="w-5 h-5 text-gray-600" />
                         <span className="text-sm text-gray-700">{factor.label}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <span className="text-sm font-medium">{factor.score}%</span>
-                        <div className={`w-2 h-2 rounded-full ${
-                          factor.status === 'excellent' ? 'bg-green-500' :
-                          factor.status === 'good' ? 'bg-blue-500' : 'bg-yellow-500'
-                        }`} />
+                        <div className={`w-2 h-2 rounded-full ${factor.status === 'excellent' ? 'bg-green-500' : factor.status === 'good' ? 'bg-blue-500' : 'bg-yellow-500'}`} />
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
@@ -218,28 +175,13 @@ const Loan = () => {
             {/* Loan Amount Selector */}
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                <h3 className="text-lg font-semibold mb-4 text-gray-100">
                   {isEnglish ? 'Select Loan Amount' : 'लोन राशि चुनें • Select Loan Amount'}
                 </h3>
                 
                 <div className="mb-4">
-                  <Input
-                    type="number"
-                    value={loanAmount}
-                    onChange={(e) => setLoanAmount(Number(e.target.value))}
-                    min={minLoanAmount}
-                    max={maxLoanAmount}
-                    className="text-center text-xl font-bold border-green-200 focus:border-green-400"
-                  />
-                  <input
-                    type="range"
-                    min={minLoanAmount}
-                    max={maxLoanAmount}
-                    step={500}
-                    value={loanAmount}
-                    onChange={(e) => setLoanAmount(Number(e.target.value))}
-                    className="w-full mt-3 accent-green-600"
-                  />
+                  <Input type="number" value={loanAmount} onChange={e => setLoanAmount(Number(e.target.value))} min={minLoanAmount} max={maxLoanAmount} className="text-center text-xl font-bold border-green-200 focus:border-green-400" />
+                  <input type="range" min={minLoanAmount} max={maxLoanAmount} step={500} value={loanAmount} onChange={e => setLoanAmount(Number(e.target.value))} className="w-full mt-3 accent-green-600" />
                   <div className="flex justify-between text-xs text-gray-500 mt-1">
                     <span>₹{minLoanAmount.toLocaleString()}</span>
                     <span>₹{maxLoanAmount.toLocaleString()}</span>
@@ -251,41 +193,25 @@ const Loan = () => {
             {/* Tenure Selection */}
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                <h3 className="text-lg font-semibold mb-4 text-gray-100">
                   {isEnglish ? 'Select Tenure' : 'अवधि चुनें • Select Tenure'}
                 </h3>
                 
                 <div className="grid grid-cols-3 gap-3">
-                  {tenureOptions.map((option) => (
-                    <Button
-                      key={option.months}
-                      variant={selectedTenure === option.months ? "default" : "outline"}
-                      className={`flex flex-col h-auto py-4 ${
-                        selectedTenure === option.months 
-                          ? "bg-green-600 hover:bg-green-700" 
-                          : "border-green-200 hover:bg-green-50"
-                      }`}
-                      onClick={() => setSelectedTenure(option.months)}
-                    >
+                  {tenureOptions.map(option => <Button key={option.months} variant={selectedTenure === option.months ? "default" : "outline"} className={`flex flex-col h-auto py-4 ${selectedTenure === option.months ? "bg-green-600 hover:bg-green-700" : "border-green-200 hover:bg-green-50"}`} onClick={() => setSelectedTenure(option.months)}>
                       <span className="text-sm font-medium">{option.label}</span>
                       <span className="text-xs opacity-80">₹{option.emi}/month</span>
-                    </Button>
-                  ))}
+                    </Button>)}
                 </div>
               </CardContent>
             </Card>
 
-            <Button 
-              onClick={handleApplyLoan}
-              className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg"
-            >
+            <Button onClick={handleApplyLoan} className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg">
               {isEnglish ? 'Apply for Loan' : 'लोन के लिए आवेदन करें'}
             </Button>
-          </>
-        )}
+          </>}
 
-        {step === 2 && (
-          <>
+        {step === 2 && <>
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -320,11 +246,7 @@ const Loan = () => {
                     <label className="text-sm font-medium text-gray-700 mb-2 block">
                       {isEnglish ? 'Monthly Income' : 'मासिक आय • Monthly Income'}
                     </label>
-                    <Input 
-                      type="number" 
-                      placeholder="₹15,000"
-                      className="border-green-200 focus:border-green-400"
-                    />
+                    <Input type="number" placeholder="₹15,000" className="border-green-200 focus:border-green-400" />
                   </div>
 
                   <div>
@@ -375,17 +297,11 @@ const Loan = () => {
               </CardContent>
             </Card>
 
-            <Button 
-              onClick={handleSubmitApplication}
-              className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg"
-            >
+            <Button onClick={handleSubmitApplication} className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg">
               {isEnglish ? 'Submit Application' : 'आवेदन जमा करें'}
             </Button>
-          </>
-        )}
+          </>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Loan;
