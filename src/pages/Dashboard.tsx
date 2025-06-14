@@ -1,76 +1,53 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Wallet, 
-  CreditCard, 
-  PiggyBank, 
-  Shield, 
-  Bell, 
-  User,
-  ArrowUpRight,
-  Plus,
-  TrendingUp,
-  Target,
-  Calendar,
-  Zap,
-  Gift
-} from 'lucide-react';
+import { Wallet, CreditCard, PiggyBank, Shield, Bell, User, ArrowUpRight, Plus, TrendingUp, Target, Calendar, Zap, Gift } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import LanguageSelector from '@/components/LanguageSelector';
-
 const Dashboard = () => {
-  const { user, walletBalance, savingsGoals, selectedLanguage } = useApp();
+  const {
+    user,
+    walletBalance,
+    savingsGoals,
+    selectedLanguage
+  } = useApp();
   const isEnglish = selectedLanguage.code === 'en';
-  
-  const [upcomingPayments] = useState([
-    { 
-      name: isEnglish ? 'Mobile Recharge' : 'Mobile Recharge', 
-      amount: 199, 
-      dueDate: isEnglish ? 'Tomorrow' : 'कल', 
-      icon: '📱' 
-    },
-    { 
-      name: isEnglish ? 'Electricity Bill' : 'Electricity Bill', 
-      amount: 850, 
-      dueDate: isEnglish ? 'In 3 days' : '3 दिन में', 
-      icon: '💡' 
-    }
-  ]);
-
-  const quickActions = [
-    { 
-      id: 'loan', 
-      icon: '📥', 
-      label: isEnglish ? 'Get Loan' : 'लोन लें', 
-      sublabel: 'Get Loan', 
-      color: 'bg-blue-50 text-blue-600', 
-      route: '/loan' 
-    },
-    { 
-      id: 'save', 
-      icon: '💰', 
-      label: isEnglish ? 'Save Money' : 'पैसे बचाएं', 
-      sublabel: 'Save Money', 
-      color: 'bg-green-50 text-green-600', 
-      route: '/savings' 
-    },
-    { 
-      id: 'insure', 
-      icon: '🛡️', 
-      label: isEnglish ? 'Get Insurance' : 'बीमा लें', 
-      sublabel: 'Get Insurance', 
-      color: 'bg-purple-50 text-purple-600', 
-      route: '/insurance' 
-    },
-  ];
-
+  const [upcomingPayments] = useState([{
+    name: isEnglish ? 'Mobile Recharge' : 'Mobile Recharge',
+    amount: 199,
+    dueDate: isEnglish ? 'Tomorrow' : 'कल',
+    icon: '📱'
+  }, {
+    name: isEnglish ? 'Electricity Bill' : 'Electricity Bill',
+    amount: 850,
+    dueDate: isEnglish ? 'In 3 days' : '3 दिन में',
+    icon: '💡'
+  }]);
+  const quickActions = [{
+    id: 'loan',
+    icon: '📥',
+    label: isEnglish ? 'Get Loan' : 'लोन लें',
+    sublabel: 'Get Loan',
+    color: 'bg-blue-50 text-blue-600',
+    route: '/loan'
+  }, {
+    id: 'save',
+    icon: '💰',
+    label: isEnglish ? 'Save Money' : 'पैसे बचाएं',
+    sublabel: 'Save Money',
+    color: 'bg-green-50 text-green-600',
+    route: '/savings'
+  }, {
+    id: 'insure',
+    icon: '🛡️',
+    label: isEnglish ? 'Get Insurance' : 'बीमा लें',
+    sublabel: 'Get Insurance',
+    color: 'bg-purple-50 text-purple-600',
+    route: '/insurance'
+  }];
   const currentSavingsGoal = savingsGoals[0];
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 pb-20">
+  return <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 pb-20">
       {/* Header */}
       <div className="bg-gradient-to-r from-green-600 to-green-700 p-6 rounded-b-3xl shadow-lg">
         <div className="flex items-center justify-between mb-4">
@@ -135,23 +112,20 @@ const Dashboard = () => {
           {isEnglish ? 'Quick Services' : 'त्वरित सेवाएं • Quick Services'}
         </h3>
         <div className="grid grid-cols-3 gap-4">
-          {quickActions.map((action) => (
-            <Card key={action.id} className="hover:shadow-md transition-all duration-300 cursor-pointer border-0 shadow-sm">
+          {quickActions.map(action => <Card key={action.id} className="hover:shadow-md transition-all duration-300 cursor-pointer border-0 shadow-sm">
               <CardContent className="p-4 text-center">
                 <div className={`w-14 h-14 mx-auto mb-3 rounded-2xl ${action.color} flex items-center justify-center text-2xl`}>
                   {action.icon}
                 </div>
-                <p className="text-sm font-semibold text-gray-800">{action.label}</p>
+                <p className="text-sm font-semibold text-gray-100">{action.label}</p>
                 {!isEnglish && <p className="text-xs text-gray-500">{action.sublabel}</p>}
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
       </div>
 
       {/* Savings Progress */}
-      {currentSavingsGoal && (
-        <div className="px-6 mt-6">
+      {currentSavingsGoal && <div className="px-6 mt-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-800">
               {isEnglish ? 'Savings Goal' : 'बचत लक्ष्य • Savings Goal'}
@@ -177,14 +151,13 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <Badge variant="secondary" className="bg-green-100 text-green-700 border-0">
-                  {Math.round((currentSavingsGoal.currentAmount / currentSavingsGoal.targetAmount) * 100)}%
+                  {Math.round(currentSavingsGoal.currentAmount / currentSavingsGoal.targetAmount * 100)}%
                 </Badge>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
-                <div 
-                  className="bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full transition-all duration-500"
-                  style={{ width: `${(currentSavingsGoal.currentAmount / currentSavingsGoal.targetAmount) * 100}%` }}
-                />
+                <div className="bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full transition-all duration-500" style={{
+              width: `${currentSavingsGoal.currentAmount / currentSavingsGoal.targetAmount * 100}%`
+            }} />
               </div>
               <Button size="sm" className="w-full mt-3 bg-green-600 hover:bg-green-700">
                 <Plus className="w-4 h-4 mr-2" />
@@ -192,8 +165,7 @@ const Dashboard = () => {
               </Button>
             </CardContent>
           </Card>
-        </div>
-      )}
+        </div>}
 
       {/* Upcoming Payments */}
       <div className="px-6 mt-6">
@@ -201,8 +173,7 @@ const Dashboard = () => {
           {isEnglish ? 'Upcoming Payments' : 'आने वाले भुगतान • Upcoming Payments'}
         </h3>
         <div className="space-y-3">
-          {upcomingPayments.map((payment, index) => (
-            <Card key={index} className="border-0 shadow-sm">
+          {upcomingPayments.map((payment, index) => <Card key={index} className="border-0 shadow-sm">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
@@ -222,8 +193,7 @@ const Dashboard = () => {
                   </div>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
       </div>
 
@@ -250,8 +220,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Dashboard;
