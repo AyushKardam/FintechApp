@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,6 +18,7 @@ import {
   Gift
 } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
+import LanguageSelector from '@/components/LanguageSelector';
 
 const Dashboard = () => {
   const { user, walletBalance, savingsGoals } = useApp();
@@ -52,6 +52,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
+            <LanguageSelector />
             <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
               <Bell className="w-5 h-5" />
             </Button>
