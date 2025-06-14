@@ -5,11 +5,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Languages } from 'lucide-react';
+import { Languages, LogOut } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { Language } from '@/types';
+import { useNavigate } from 'react-router-dom';
 
 const languages: Language[] = [
   { code: 'hi', name: 'Hindi', nativeName: 'हिंदी', flag: '🇮🇳' },
@@ -21,7 +23,14 @@ const languages: Language[] = [
 ];
 
 const LanguageSelector = () => {
-  const { selectedLanguage, setSelectedLanguage } = useApp();
+  const { selectedLanguage, setSelectedLanguage, setIsOnboarded, setUser } = useApp();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setIsOnboarded(false);
+    setUser(null);
+    navigate('/onboarding/language');
+  };
 
   return (
     <DropdownMenu>
@@ -49,6 +58,14 @@ const LanguageSelector = () => {
             </div>
           </DropdownMenuItem>
         ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={handleLogout}
+          className="flex items-center space-x-3 px-3 py-2 cursor-pointer hover:bg-red-50 text-red-600"
+        >
+          <LogOut className="w-4 h-4" />
+          <span className="text-sm font-medium">Logout</span>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
