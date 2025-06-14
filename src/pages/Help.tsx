@@ -71,11 +71,11 @@ const Help = () => {
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="flex items-center space-x-4 mb-6">
-          <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="rounded-full">
+          <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="rounded-full text-gray-950 bg-amber-400 hover:bg-amber-300">
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-gray-100">
+            <h1 className="text-xl font-bold text-gray-950">
               {isEnglish ? 'Help Center' : 'मदद केंद्र'}
             </h1>
             {!isEnglish && <p className="text-sm text-gray-600">Help & Learning Center</p>}
@@ -352,7 +352,7 @@ const Help = () => {
                     {isEnglish ? 'Your referral code:' : 'आपका रेफरल कोड:'}
                   </p>
                   <div className="flex items-center justify-between bg-white p-2 rounded border">
-                    <span className="font-mono font-bold">PAISA{referralStats.totalReferrals}ABC</span>
+                    <span className="font-mono font-bold text-gray-950">PAISA{referralStats.totalReferrals}ABC</span>
                     <Button size="sm" variant="outline">
                       {isEnglish ? 'Copy' : 'कॉपी'}
                     </Button>
@@ -370,7 +370,7 @@ const Help = () => {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-100">
+                      <p className="font-medium text-gray-950">
                         {isEnglish ? 'New user joins' : 'नया यूजर जॉइन करे'}
                       </p>
                       <p className="text-sm text-gray-600">
@@ -383,7 +383,7 @@ const Help = () => {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-100">
+                      <p className="font-medium text-gray-950">
                         {isEnglish ? 'Takes first loan' : 'पहला लोन ले'}
                       </p>
                       <p className="text-sm text-gray-600">
@@ -396,7 +396,7 @@ const Help = () => {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-100">
+                      <p className="font-medium text-gray-950">
                         {isEnglish ? '10 friends join' : '10 दोस्त जॉइन करें'}
                       </p>
                       <p className="text-sm text-gray-600">
