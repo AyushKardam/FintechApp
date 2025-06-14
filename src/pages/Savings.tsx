@@ -204,7 +204,7 @@ const Savings = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-medium text-gray-800">{rule.name}</h4>
+                      <h4 className="font-medium text-gray-100">{rule.name}</h4>
                       <p className="text-sm text-gray-500">{rule.description}</p>
                       <p className="text-sm font-medium text-green-600">{rule.amount}</p>
                     </div>
