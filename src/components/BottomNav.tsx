@@ -2,17 +2,45 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Home, CreditCard, PiggyBank, Shield, HelpCircle } from 'lucide-react';
+import { useApp } from '@/contexts/AppContext';
 
 const BottomNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { selectedLanguage } = useApp();
+  const isEnglish = selectedLanguage.code === 'en';
 
   const navItems = [
-    { id: 'home', icon: Home, label: 'होम', englishLabel: 'Home', path: '/dashboard' },
-    { id: 'loan', icon: CreditCard, label: 'लोन', englishLabel: 'Loan', path: '/loan' },
-    { id: 'save', icon: PiggyBank, label: 'बचत', englishLabel: 'Save', path: '/savings' },
-    { id: 'insure', icon: Shield, label: 'बीमा', englishLabel: 'Insure', path: '/insurance' },
-    { id: 'help', icon: HelpCircle, label: 'मदद', englishLabel: 'Help', path: '/help' },
+    { 
+      id: 'home', 
+      icon: Home, 
+      label: isEnglish ? 'Home' : 'होम', 
+      path: '/dashboard' 
+    },
+    { 
+      id: 'loan', 
+      icon: CreditCard, 
+      label: isEnglish ? 'Loan' : 'लोन', 
+      path: '/loan' 
+    },
+    { 
+      id: 'save', 
+      icon: PiggyBank, 
+      label: isEnglish ? 'Save' : 'बचत', 
+      path: '/savings' 
+    },
+    { 
+      id: 'insure', 
+      icon: Shield, 
+      label: isEnglish ? 'Insure' : 'बीमा', 
+      path: '/insurance' 
+    },
+    { 
+      id: 'help', 
+      icon: HelpCircle, 
+      label: isEnglish ? 'Help' : 'मदद', 
+      path: '/help' 
+    },
   ];
 
   return (

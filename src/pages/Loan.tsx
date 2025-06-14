@@ -19,7 +19,8 @@ import { useApp } from '@/contexts/AppContext';
 
 const Loan = () => {
   const navigate = useNavigate();
-  const { user } = useApp();
+  const { user, selectedLanguage } = useApp();
+  const isEnglish = selectedLanguage.code === 'en';
   const [loanAmount, setLoanAmount] = useState(5000);
   const [selectedTenure, setSelectedTenure] = useState(6);
   const [step, setStep] = useState(1); // 1: eligibility, 2: application, 3: confirmation
@@ -29,16 +30,48 @@ const Loan = () => {
   const minLoanAmount = 2000;
 
   const tenureOptions = [
-    { months: 3, emi: Math.round(loanAmount / 3), label: '3 महीने' },
-    { months: 6, emi: Math.round(loanAmount / 6), label: '6 महीने' },
-    { months: 12, emi: Math.round(loanAmount / 12), label: '12 महीने' },
+    { 
+      months: 3, 
+      emi: Math.round(loanAmount / 3), 
+      label: isEnglish ? '3 Months' : '3 महीने' 
+    },
+    { 
+      months: 6, 
+      emi: Math.round(loanAmount / 6), 
+      label: isEnglish ? '6 Months' : '6 महीने' 
+    },
+    { 
+      months: 12, 
+      emi: Math.round(loanAmount / 12), 
+      label: isEnglish ? '12 Months' : '12 महीने' 
+    },
   ];
 
   const eligibilityFactors = [
-    { label: 'मोबाइल एक्टिविटी', score: 85, icon: Smartphone, status: 'good' },
-    { label: 'UPI ट्रांजेक्शन', score: 78, icon: CreditCard, status: 'good' },
-    { label: 'कम्युनिटी स्कोर', score: 90, icon: TrendingUp, status: 'excellent' },
-    { label: 'रेगुलर इनकम', score: 70, icon: Activity, status: 'fair' },
+    { 
+      label: isEnglish ? 'Mobile Activity' : 'मोबाइल एक्टिविटी', 
+      score: 85, 
+      icon: Smartphone, 
+      status: 'good' 
+    },
+    { 
+      label: isEnglish ? 'UPI Transactions' : 'UPI ट्रांजेक्शन', 
+      score: 78, 
+      icon: CreditCard, 
+      status: 'good' 
+    },
+    { 
+      label: isEnglish ? 'Community Score' : 'कम्युनिटी स्कोर', 
+      score: 90, 
+      icon: TrendingUp, 
+      status: 'excellent' 
+    },
+    { 
+      label: isEnglish ? 'Regular Income' : 'रेगुलर इनकम', 
+      score: 70, 
+      icon: Activity, 
+      status: 'fair' 
+    },
   ];
 
   const handleApplyLoan = () => {
@@ -58,33 +91,41 @@ const Loan = () => {
               <CheckCircle className="w-10 h-10 text-green-600" />
             </div>
             <h1 className="text-2xl font-bold text-gray-800 mb-2">
-              आवेदन सफल!
+              {isEnglish ? 'Application Successful!' : 'आवेदन सफल!'}
             </h1>
             <p className="text-gray-600">
-              Application Submitted Successfully
+              {isEnglish ? 'Application Submitted Successfully' : 'Application Submitted Successfully'}
             </p>
           </div>
 
           <Card className="border-0 shadow-lg mb-6">
             <CardContent className="p-6 text-center">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                लोन की जानकारी
+                {isEnglish ? 'Loan Details' : 'लोन की जानकारी'}
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">राशि:</span>
+                  <span className="text-gray-600">
+                    {isEnglish ? 'Amount:' : 'राशि:'}
+                  </span>
                   <span className="font-semibold">₹{loanAmount.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">अवधि:</span>
-                  <span className="font-semibold">{selectedTenure} महीने</span>
+                  <span className="text-gray-600">
+                    {isEnglish ? 'Tenure:' : 'अवधि:'}
+                  </span>
+                  <span className="font-semibold">
+                    {selectedTenure} {isEnglish ? 'months' : 'महीने'}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">EMI:</span>
                   <span className="font-semibold">₹{Math.round(loanAmount / selectedTenure)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">स्टेटस:</span>
+                  <span className="text-gray-600">
+                    {isEnglish ? 'Status:' : 'स्टेटस:'}
+                  </span>
                   <Badge className="bg-yellow-100 text-yellow-700">Under Review</Badge>
                 </div>
               </div>
@@ -94,7 +135,10 @@ const Loan = () => {
           <Card className="border-0 shadow-sm bg-blue-50 mb-6">
             <CardContent className="p-4">
               <p className="text-sm text-blue-700 text-center">
-                💬 आपका एजेंट जल्द ही आपसे संपर्क करेगा। 24-48 घंटे में अप्रूवल की जानकारी मिलेगी।
+                {isEnglish 
+                  ? '💬 Our agent will contact you soon. You will get approval information in 24-48 hours.'
+                  : '💬 आपका एजेंट जल्द ही आपसे संपर्क करेगा। 24-48 घंटे में अप्रूवल की जानकारी मिलेगी।'
+                }
               </p>
             </CardContent>
           </Card>
@@ -103,7 +147,7 @@ const Loan = () => {
             onClick={() => navigate('/dashboard')} 
             className="w-full bg-green-600 hover:bg-green-700 h-12"
           >
-            होम पर वापस जाएं
+            {isEnglish ? 'Back to Home' : 'होम पर वापस जाएं'}
           </Button>
         </div>
       </div>
@@ -124,8 +168,10 @@ const Loan = () => {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-gray-800">माइक्रो लोन</h1>
-            <p className="text-sm text-gray-600">Micro Loan</p>
+            <h1 className="text-xl font-bold text-gray-800">
+              {isEnglish ? 'Micro Loan' : 'माइक्रो लोन'}
+            </h1>
+            {!isEnglish && <p className="text-sm text-gray-600">Micro Loan</p>}
           </div>
         </div>
 
@@ -136,13 +182,17 @@ const Loan = () => {
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    आपकी योग्यता • Your Eligibility
+                    {isEnglish ? 'Your Eligibility' : 'आपकी योग्यता • Your Eligibility'}
                   </h3>
                   <div className="w-20 h-20 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
                     <span className="text-2xl font-bold text-green-600">{eligibilityScore}</span>
                   </div>
-                  <p className="text-green-600 font-medium">बहुत अच्छा स्कोर!</p>
-                  <p className="text-sm text-gray-500">Maximum loan: ₹{maxLoanAmount.toLocaleString()}</p>
+                  <p className="text-green-600 font-medium">
+                    {isEnglish ? 'Excellent Score!' : 'बहुत अच्छा स्कोर!'}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {isEnglish ? `Maximum loan: ₹${maxLoanAmount.toLocaleString()}` : `Maximum loan: ₹${maxLoanAmount.toLocaleString()}`}
+                  </p>
                 </div>
 
                 <div className="space-y-3">
@@ -169,7 +219,7 @@ const Loan = () => {
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  लोन राशि चुनें • Select Loan Amount
+                  {isEnglish ? 'Select Loan Amount' : 'लोन राशि चुनें • Select Loan Amount'}
                 </h3>
                 
                 <div className="mb-4">
@@ -202,7 +252,7 @@ const Loan = () => {
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  अवधि चुनें • Select Tenure
+                  {isEnglish ? 'Select Tenure' : 'अवधि चुनें • Select Tenure'}
                 </h3>
                 
                 <div className="grid grid-cols-3 gap-3">
@@ -229,7 +279,7 @@ const Loan = () => {
               onClick={handleApplyLoan}
               className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg"
             >
-              लोन के लिए आवेदन करें
+              {isEnglish ? 'Apply for Loan' : 'लोन के लिए आवेदन करें'}
             </Button>
           </>
         )}
@@ -239,26 +289,36 @@ const Loan = () => {
             <Card className="border-0 shadow-lg mb-6">
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  लोन आवेदन • Loan Application
+                  {isEnglish ? 'Loan Application' : 'लोन आवेदन • Loan Application'}
                 </h3>
                 
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium text-gray-700 mb-2 block">
-                      लोन का उद्देश्य • Purpose of Loan
+                      {isEnglish ? 'Purpose of Loan' : 'लोन का उद्देश्य • Purpose of Loan'}
                     </label>
                     <select className="w-full p-3 border border-green-200 rounded-lg focus:border-green-400">
-                      <option>व्यापार विस्तार • Business Expansion</option>
-                      <option>मेडिकल इमरजेंसी • Medical Emergency</option>
-                      <option>शिक्षा • Education</option>
-                      <option>घरेलू जरूरत • Household Needs</option>
-                      <option>अन्य • Other</option>
+                      <option>
+                        {isEnglish ? 'Business Expansion' : 'व्यापार विस्तार • Business Expansion'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Medical Emergency' : 'मेडिकल इमरजेंसी • Medical Emergency'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Education' : 'शिक्षा • Education'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Household Needs' : 'घरेलू जरूरत • Household Needs'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Other' : 'अन्य • Other'}
+                      </option>
                     </select>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium text-gray-700 mb-2 block">
-                      मासिक आय • Monthly Income
+                      {isEnglish ? 'Monthly Income' : 'मासिक आय • Monthly Income'}
                     </label>
                     <Input 
                       type="number" 
@@ -269,14 +329,24 @@ const Loan = () => {
 
                   <div>
                     <label className="text-sm font-medium text-gray-700 mb-2 block">
-                      व्यवसाय • Occupation
+                      {isEnglish ? 'Occupation' : 'व्यवसाय • Occupation'}
                     </label>
                     <select className="w-full p-3 border border-green-200 rounded-lg focus:border-green-400">
-                      <option>दुकानदार • Shop Owner</option>
-                      <option>ड्राइवर • Driver</option>
-                      <option>मजदूर • Labor</option>
-                      <option>कारीगर • Artisan</option>
-                      <option>अन्य • Other</option>
+                      <option>
+                        {isEnglish ? 'Shop Owner' : 'दुकानदार • Shop Owner'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Driver' : 'ड्राइवर • Driver'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Labor' : 'मजदूर • Labor'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Artisan' : 'कारीगर • Artisan'}
+                      </option>
+                      <option>
+                        {isEnglish ? 'Other' : 'अन्य • Other'}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -285,11 +355,19 @@ const Loan = () => {
                   <div className="flex items-start space-x-2">
                     <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
                     <div>
-                      <p className="text-sm text-blue-700 font-medium">जरूरी बातें:</p>
+                      <p className="text-sm text-blue-700 font-medium">
+                        {isEnglish ? 'Important Information:' : 'जरूरी बातें:'}
+                      </p>
                       <ul className="text-xs text-blue-600 mt-1 space-y-1">
-                        <li>• कोई छिपी हुई फीस नहीं</li>
-                        <li>• समय पर भुगतान करें</li>
-                        <li>• आपकी जानकारी सुरक्षित है</li>
+                        <li>
+                          {isEnglish ? '• No hidden fees' : '• कोई छिपी हुई फीस नहीं'}
+                        </li>
+                        <li>
+                          {isEnglish ? '• Pay on time' : '• समय पर भुगतान करें'}
+                        </li>
+                        <li>
+                          {isEnglish ? '• Your information is secure' : '• आपकी जानकारी सुरक्षित है'}
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -301,7 +379,7 @@ const Loan = () => {
               onClick={handleSubmitApplication}
               className="w-full bg-green-600 hover:bg-green-700 h-12 text-lg"
             >
-              आवेदन जमा करें
+              {isEnglish ? 'Submit Application' : 'आवेदन जमा करें'}
             </Button>
           </>
         )}

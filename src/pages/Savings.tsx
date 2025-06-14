@@ -20,16 +20,35 @@ import { useApp } from '@/contexts/AppContext';
 
 const Savings = () => {
   const navigate = useNavigate();
-  const { savingsGoals, walletBalance } = useApp();
+  const { savingsGoals, walletBalance, selectedLanguage } = useApp();
+  const isEnglish = selectedLanguage.code === 'en';
   const [activeTab, setActiveTab] = useState('goals'); // goals, autosave, rewards
   const [showAddGoal, setShowAddGoal] = useState(false);
   const [newGoalName, setNewGoalName] = useState('');
   const [newGoalAmount, setNewGoalAmount] = useState('');
 
   const autoSaveRules = [
-    { id: 1, name: 'राउंड अप', description: 'UPI लेनदेन का राउंड अप', amount: 'Variable', active: true },
-    { id: 2, name: 'साप्ताहिक बचत', description: 'हर शुक्रवार', amount: '₹100', active: false },
-    { id: 3, name: 'दैनिक बचत', description: 'रोज़ाना', amount: '₹20', active: true },
+    { 
+      id: 1, 
+      name: isEnglish ? 'Round Up' : 'राउंड अप', 
+      description: isEnglish ? 'UPI transaction round up' : 'UPI लेनदेन का राउंड अप', 
+      amount: 'Variable', 
+      active: true 
+    },
+    { 
+      id: 2, 
+      name: isEnglish ? 'Weekly Savings' : 'साप्ताहिक बचत', 
+      description: isEnglish ? 'Every Friday' : 'हर शुक्रवार', 
+      amount: '₹100', 
+      active: false 
+    },
+    { 
+      id: 3, 
+      name: isEnglish ? 'Daily Savings' : 'दैनिक बचत', 
+      description: isEnglish ? 'Daily' : 'रोज़ाना', 
+      amount: '₹20', 
+      active: true 
+    },
   ];
 
   const goalIcons = ['🎉', '🏠', '📚', '🚗', '💍', '🎁', '⚡', '🏥'];
@@ -50,8 +69,10 @@ const Savings = () => {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-gray-800">डिजिटल गुल्लक</h1>
-            <p className="text-sm text-gray-600">Digital Piggy Bank</p>
+            <h1 className="text-xl font-bold text-gray-800">
+              {isEnglish ? 'Digital Piggy Bank' : 'डिजिटल गुल्लक'}
+            </h1>
+            {!isEnglish && <p className="text-sm text-gray-600">Digital Piggy Bank</p>}
           </div>
         </div>
 
@@ -60,11 +81,13 @@ const Savings = () => {
           <CardContent className="p-6 text-white">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-green-100 text-sm mb-1">कुल बचत • Total Saved</p>
+                <p className="text-green-100 text-sm mb-1">
+                  {isEnglish ? 'Total Saved' : 'कुल बचत • Total Saved'}
+                </p>
                 <h2 className="text-3xl font-bold">₹{totalSaved.toLocaleString()}</h2>
                 <p className="text-green-200 text-sm flex items-center mt-1">
                   <TrendingUp className="w-4 h-4 mr-1" />
-                  इस महीने +₹450
+                  {isEnglish ? 'This month +₹450' : 'इस महीने +₹450'}
                 </p>
               </div>
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
@@ -74,7 +97,7 @@ const Savings = () => {
             <div className="flex space-x-2">
               <Button size="sm" className="bg-white text-green-600 hover:bg-green-50 flex-1">
                 <Plus className="w-4 h-4 mr-2" />
-                पैसे जोड़ें
+                {isEnglish ? 'Add Money' : 'पैसे जोड़ें'}
               </Button>
               <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10">
                 <Settings className="w-4 h-4" />
@@ -91,7 +114,7 @@ const Savings = () => {
             className={`flex-1 ${activeTab === 'goals' ? 'bg-green-600 text-white' : 'text-gray-600'}`}
             onClick={() => setActiveTab('goals')}
           >
-            लक्ष्य • Goals
+            {isEnglish ? 'Goals' : 'लक्ष्य • Goals'}
           </Button>
           <Button
             variant={activeTab === 'autosave' ? 'default' : 'ghost'}
@@ -99,7 +122,7 @@ const Savings = () => {
             className={`flex-1 ${activeTab === 'autosave' ? 'bg-green-600 text-white' : 'text-gray-600'}`}
             onClick={() => setActiveTab('autosave')}
           >
-            ऑटो सेव
+            {isEnglish ? 'Auto Save' : 'ऑटो सेव'}
           </Button>
           <Button
             variant={activeTab === 'rewards' ? 'default' : 'ghost'}
@@ -107,7 +130,7 @@ const Savings = () => {
             className={`flex-1 ${activeTab === 'rewards' ? 'bg-green-600 text-white' : 'text-gray-600'}`}
             onClick={() => setActiveTab('rewards')}
           >
-            रिवार्ड्स
+            {isEnglish ? 'Rewards' : 'रिवार्ड्स'}
           </Button>
         </div>
 
@@ -120,19 +143,21 @@ const Savings = () => {
                 className="w-full bg-green-600 hover:bg-green-700 h-12"
               >
                 <Plus className="w-5 h-5 mr-2" />
-                नया लक्ष्य बनाएं
+                {isEnglish ? 'Create New Goal' : 'नया लक्ष्य बनाएं'}
               </Button>
             ) : (
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-gray-800 mb-4">नया बचत लक्ष्य</h3>
+                  <h3 className="font-semibold text-gray-800 mb-4">
+                    {isEnglish ? 'New Savings Goal' : 'नया बचत लक्ष्य'}
+                  </h3>
                   <div className="space-y-4">
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-2 block">
-                        लक्ष्य का नाम
+                        {isEnglish ? 'Goal Name' : 'लक्ष्य का नाम'}
                       </label>
                       <Input
-                        placeholder="जैसे: त्योहार फंड"
+                        placeholder={isEnglish ? 'e.g: Festival Fund' : 'जैसे: त्योहार फंड'}
                         value={newGoalName}
                         onChange={(e) => setNewGoalName(e.target.value)}
                         className="border-green-200 focus:border-green-400"
@@ -140,7 +165,7 @@ const Savings = () => {
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-2 block">
-                        लक्ष्य राशि
+                        {isEnglish ? 'Target Amount' : 'लक्ष्य राशि'}
                       </label>
                       <Input
                         type="number"
@@ -152,7 +177,7 @@ const Savings = () => {
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-700 mb-2 block">
-                        आइकन चुनें
+                        {isEnglish ? 'Choose Icon' : 'आइकन चुनें'}
                       </label>
                       <div className="grid grid-cols-8 gap-2">
                         {goalIcons.map((icon, index) => (
@@ -173,13 +198,13 @@ const Savings = () => {
                         variant="outline"
                         className="flex-1"
                       >
-                        रद्द करें
+                        {isEnglish ? 'Cancel' : 'रद्द करें'}
                       </Button>
                       <Button 
                         className="flex-1 bg-green-600 hover:bg-green-700"
                         onClick={() => setShowAddGoal(false)}
                       >
-                        बनाएं
+                        {isEnglish ? 'Create' : 'बनाएं'}
                       </Button>
                     </div>
                   </div>
@@ -239,8 +264,12 @@ const Savings = () => {
                 <div className="flex items-center space-x-3">
                   <Zap className="w-6 h-6 text-blue-600" />
                   <div>
-                    <h4 className="font-medium text-gray-800">स्मार्ट सेविंग</h4>
-                    <p className="text-sm text-gray-600">अपने आप पैसे बचाएं</p>
+                    <h4 className="font-medium text-gray-800">
+                      {isEnglish ? 'Smart Saving' : 'स्मार्ट सेविंग'}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {isEnglish ? 'Save money automatically' : 'अपने आप पैसे बचाएं'}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -257,10 +286,10 @@ const Savings = () => {
                     </div>
                     <div className="flex items-center space-x-3">
                       <Badge variant={rule.active ? 'default' : 'secondary'}>
-                        {rule.active ? 'चालू' : 'बंद'}
+                        {rule.active ? (isEnglish ? 'Active' : 'चालू') : (isEnglish ? 'Inactive' : 'बंद')}
                       </Badge>
                       <Button size="sm" variant="outline">
-                        {rule.active ? 'बंद करें' : 'चालू करें'}
+                        {rule.active ? (isEnglish ? 'Turn Off' : 'बंद करें') : (isEnglish ? 'Turn On' : 'चालू करें')}
                       </Button>
                     </div>
                   </div>
@@ -277,10 +306,14 @@ const Savings = () => {
               <CardContent className="p-6">
                 <div className="text-center">
                   <Gift className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-                  <h3 className="font-semibold text-gray-800 mb-2">दैनिक रिवार्ड</h3>
-                  <p className="text-sm text-gray-600 mb-4">लगातार बचत करें और रिवार्ड जीतें</p>
+                  <h3 className="font-semibold text-gray-800 mb-2">
+                    {isEnglish ? 'Daily Rewards' : 'दैनिक रिवार्ड'}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    {isEnglish ? 'Save consistently and win rewards' : 'लगातार बचत करें और रिवार्ड जीतें'}
+                  </p>
                   <Button className="bg-purple-600 hover:bg-purple-700">
-                    आज का रिवार्ड लें
+                    {isEnglish ? 'Claim Today\'s Reward' : 'आज का रिवार्ड लें'}
                   </Button>
                 </div>
               </CardContent>
@@ -288,19 +321,29 @@ const Savings = () => {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-800 mb-4">बचत चुनौती</h3>
+                <h3 className="font-semibold text-gray-800 mb-4">
+                  {isEnglish ? 'Savings Challenge' : 'बचत चुनौती'}
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">7 दिन लगातार बचत</p>
-                      <p className="text-sm text-gray-600">₹50 बोनस जीतें</p>
+                      <p className="font-medium text-gray-800">
+                        {isEnglish ? '7 days continuous saving' : '7 दिन लगातार बचत'}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {isEnglish ? 'Win ₹50 bonus' : '₹50 बोनस जीतें'}
+                      </p>
                     </div>
                     <Badge className="bg-green-100 text-green-700">5/7</Badge>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-800">₹1000 बचत पूरी करें</p>
-                      <p className="text-sm text-gray-600">₹100 बोनस जीतें</p>
+                      <p className="font-medium text-gray-800">
+                        {isEnglish ? 'Complete ₹1000 savings' : '₹1000 बचत पूरी करें'}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {isEnglish ? 'Win ₹100 bonus' : '₹100 बोनस जीतें'}
+                      </p>
                     </div>
                     <Badge variant="secondary">780/1000</Badge>
                   </div>
