@@ -144,7 +144,7 @@ const Dashboard = () => {
                     {currentSavingsGoal.icon}
                   </div>
                   <div>
-                    <h4 className="text-gray-800 font-medium">{currentSavingsGoal.name}</h4>
+                    <h4 className="font-medium text-gray-100">{currentSavingsGoal.name}</h4>
                     <p className="text-sm text-gray-500">
                       ₹{currentSavingsGoal.currentAmount.toLocaleString()} of ₹{currentSavingsGoal.targetAmount.toLocaleString()}
                     </p>
@@ -181,12 +181,12 @@ const Dashboard = () => {
                       {payment.icon}
                     </div>
                     <div>
-                      <p className="text-gray-800 font-medium">{payment.name}</p>
+                      <p className="font-medium text-gray-100">{payment.name}</p>
                       <p className="text-sm text-gray-500">Due {payment.dueDate}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-gray-800 font-medium">₹{payment.amount}</p>
+                    <p className="font-medium text-gray-100">₹{payment.amount}</p>
                     <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white mt-1">
                       {isEnglish ? 'Pay Now' : 'भुगतान करें'}
                     </Button>
