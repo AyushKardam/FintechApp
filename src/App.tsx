@@ -13,6 +13,10 @@ import VoiceSetup from "./pages/onboarding/VoiceSetup";
 import AgentReferral from "./pages/onboarding/AgentReferral";
 import KYC from "./pages/onboarding/KYC";
 import Dashboard from "./pages/Dashboard";
+import Loan from "./pages/Loan";
+import Savings from "./pages/Savings";
+import Insurance from "./pages/Insurance";
+import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,12 +35,10 @@ const AppContent = () => {
         
         {/* App Routes */}
         <Route path="/dashboard" element={<Dashboard />} />
-        
-        {/* Placeholder routes for future implementation */}
-        <Route path="/loan" element={<div className="p-6 text-white">Loan page coming soon...</div>} />
-        <Route path="/savings" element={<div className="p-6 text-white">Savings page coming soon...</div>} />
-        <Route path="/insurance" element={<div className="p-6 text-white">Insurance page coming soon...</div>} />
-        <Route path="/help" element={<div className="p-6 text-white">Help page coming soon...</div>} />
+        <Route path="/loan" element={<Loan />} />
+        <Route path="/savings" element={<Savings />} />
+        <Route path="/insurance" element={<Insurance />} />
+        <Route path="/help" element={<Help />} />
         
         {/* Root route redirect */}
         <Route 

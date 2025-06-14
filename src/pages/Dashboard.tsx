@@ -14,86 +14,94 @@ import {
   Plus,
   TrendingUp,
   Target,
-  Calendar
+  Calendar,
+  Zap,
+  Gift
 } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 
 const Dashboard = () => {
-  const { user } = useApp();
-  const [walletBalance] = useState(2450);
-  const [savingsGoal] = useState({ current: 1200, target: 5000, name: 'Festival Fund' });
+  const { user, walletBalance, savingsGoals } = useApp();
   const [upcomingPayments] = useState([
-    { name: 'Mobile Recharge', amount: 199, dueDate: 'Tomorrow' },
-    { name: 'Electricity Bill', amount: 850, dueDate: '3 days' }
+    { name: 'Mobile Recharge', amount: 199, dueDate: 'कल', icon: '📱' },
+    { name: 'Electricity Bill', amount: 850, dueDate: '3 दिन में', icon: '💡' }
   ]);
 
   const quickActions = [
-    { id: 'loan', icon: CreditCard, label: 'Get Loan', color: 'cred-purple', route: '/loan' },
-    { id: 'save', icon: PiggyBank, label: 'Save Money', color: 'cred-gold', route: '/savings' },
-    { id: 'insure', icon: Shield, label: 'Get Insurance', color: 'green-500', route: '/insurance' },
+    { id: 'loan', icon: '📥', label: 'लोन लें', sublabel: 'Get Loan', color: 'bg-blue-50 text-blue-600', route: '/loan' },
+    { id: 'save', icon: '💰', label: 'पैसे बचाएं', sublabel: 'Save Money', color: 'bg-green-50 text-green-600', route: '/savings' },
+    { id: 'insure', icon: '🛡️', label: 'बीमा लें', sublabel: 'Get Insurance', color: 'bg-purple-50 text-purple-600', route: '/insurance' },
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-cred-bg via-cred-dark to-cred-bg pb-20">
-      {/* Header */}
-      <div className="flex items-center justify-between p-6 pb-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cred-purple to-cred-gold flex items-center justify-center text-xl">
-            {user?.name?.charAt(0) || 'U'}
-          </div>
-          <div>
-            <h1 className="text-lg font-semibold text-white">
-              नमस्ते, {user?.name || 'User'}
-            </h1>
-            <p className="text-sm text-gray-400">Community Score: {user?.communityScore || 725}</p>
-          </div>
-        </div>
-        <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-            <Bell className="w-5 h-5" />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
-            <User className="w-5 h-5" />
-          </Button>
-        </div>
-      </div>
+  const currentSavingsGoal = savingsGoals[0];
 
-      {/* My Wallet */}
-      <div className="px-6 mb-6 animate-fade-in">
-        <Card className="glass-card border-0 bg-gradient-to-r from-cred-purple/20 to-cred-gold/20">
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 pb-20">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-green-600 to-green-700 p-6 rounded-b-3xl shadow-lg">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-xl text-white font-bold">
+              {user?.name?.charAt(0) || 'P'}
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-white">
+                नमस्ते, {user?.name || 'साथी'}
+              </h1>
+              <p className="text-sm text-green-100">आपका पैसा साथी • PaisaSathi</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
+              <Bell className="w-5 h-5" />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20">
+              <User className="w-5 h-5" />
+            </Button>
+          </div>
+        </div>
+
+        {/* My Wallet Card */}
+        <Card className="bg-white/10 backdrop-blur-sm border-white/20">
           <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400 mb-1">My Wallet</p>
-                <h2 className="text-3xl font-bold gradient-text">₹{walletBalance.toLocaleString()}</h2>
-                <p className="text-sm text-green-400 flex items-center mt-1">
+                <p className="text-sm text-green-100 mb-1">मेरा वॉलेट • My Wallet</p>
+                <h2 className="text-3xl font-bold text-white">₹{walletBalance.toLocaleString()}</h2>
+                <p className="text-sm text-green-200 flex items-center mt-2">
                   <TrendingUp className="w-4 h-4 mr-1" />
-                  +₹150 this week
+                  इस हफ्ते +₹150
                 </p>
               </div>
-              <div className="w-16 h-16 rounded-full border-4 border-cred-gold/30 flex items-center justify-center">
-                <Wallet className="w-8 h-8 text-cred-gold" />
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                <Wallet className="w-8 h-8 text-white" />
               </div>
             </div>
-            <Button size="sm" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Money
-            </Button>
+            <div className="flex space-x-2 mt-4">
+              <Button size="sm" className="bg-white text-green-600 hover:bg-green-50 flex-1">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Money
+              </Button>
+              <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                <Zap className="w-4 h-4" />
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Quick Actions */}
-      <div className="px-6 mb-6">
-        <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+      <div className="px-6 mt-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">त्वरित सेवाएं • Quick Services</h3>
         <div className="grid grid-cols-3 gap-4">
           {quickActions.map((action) => (
-            <Card key={action.id} className="glass-card border-0 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+            <Card key={action.id} className="hover:shadow-md transition-all duration-300 cursor-pointer border-0 shadow-sm">
               <CardContent className="p-4 text-center">
-                <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-${action.color}/20 flex items-center justify-center`}>
-                  <action.icon className={`w-6 h-6 text-${action.color}`} />
+                <div className={`w-14 h-14 mx-auto mb-3 rounded-2xl ${action.color} flex items-center justify-center text-2xl`}>
+                  {action.icon}
                 </div>
-                <p className="text-sm font-medium text-white">{action.label}</p>
+                <p className="text-sm font-semibold text-gray-800">{action.label}</p>
+                <p className="text-xs text-gray-500">{action.sublabel}</p>
               </CardContent>
             </Card>
           ))}
@@ -101,64 +109,70 @@ const Dashboard = () => {
       </div>
 
       {/* Savings Progress */}
-      <div className="px-6 mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-white">Savings Goal</h3>
-          <Button variant="ghost" size="sm" className="text-cred-gold">
-            View All
-            <ArrowUpRight className="w-4 h-4 ml-1" />
-          </Button>
-        </div>
-        
-        <Card className="glass-card border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-cred-gold/20 flex items-center justify-center">
-                  <Target className="w-5 h-5 text-cred-gold" />
+      {currentSavingsGoal && (
+        <div className="px-6 mt-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-800">बचत लक्ष्य • Savings Goal</h3>
+            <Button variant="ghost" size="sm" className="text-green-600">
+              सभी देखें
+              <ArrowUpRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
+          
+          <Card className="border-0 shadow-sm">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-2xl">
+                    {currentSavingsGoal.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-gray-800 font-medium">{currentSavingsGoal.name}</h4>
+                    <p className="text-sm text-gray-500">
+                      ₹{currentSavingsGoal.currentAmount.toLocaleString()} of ₹{currentSavingsGoal.targetAmount.toLocaleString()}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-white font-medium">{savingsGoal.name}</h4>
-                  <p className="text-sm text-gray-400">
-                    ₹{savingsGoal.current.toLocaleString()} of ₹{savingsGoal.target.toLocaleString()}
-                  </p>
-                </div>
+                <Badge variant="secondary" className="bg-green-100 text-green-700 border-0">
+                  {Math.round((currentSavingsGoal.currentAmount / currentSavingsGoal.targetAmount) * 100)}%
+                </Badge>
               </div>
-              <Badge variant="secondary" className="bg-green-500/20 text-green-400 border-0">
-                {Math.round((savingsGoal.current / savingsGoal.target) * 100)}%
-              </Badge>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-gradient-to-r from-cred-gold to-cred-gold/80 h-2 rounded-full transition-all duration-500"
-                style={{ width: `${(savingsGoal.current / savingsGoal.target) * 100}%` }}
-              />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div 
+                  className="bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full transition-all duration-500"
+                  style={{ width: `${(currentSavingsGoal.currentAmount / currentSavingsGoal.targetAmount) * 100}%` }}
+                />
+              </div>
+              <Button size="sm" className="w-full mt-3 bg-green-600 hover:bg-green-700">
+                <Plus className="w-4 h-4 mr-2" />
+                ₹100 जोड़ें
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
-      {/* Reminders */}
-      <div className="px-6 mb-6">
-        <h3 className="text-lg font-semibold text-white mb-4">Upcoming Payments</h3>
+      {/* Upcoming Payments */}
+      <div className="px-6 mt-6">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">आने वाले भुगतान • Upcoming Payments</h3>
         <div className="space-y-3">
           {upcomingPayments.map((payment, index) => (
-            <Card key={index} className="glass-card border-0">
+            <Card key={index} className="border-0 shadow-sm">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                      <Calendar className="w-5 h-5 text-orange-400" />
+                    <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-xl">
+                      {payment.icon}
                     </div>
                     <div>
-                      <p className="text-white font-medium">{payment.name}</p>
-                      <p className="text-sm text-gray-400">Due {payment.dueDate}</p>
+                      <p className="text-gray-800 font-medium">{payment.name}</p>
+                      <p className="text-sm text-gray-500">Due {payment.dueDate}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-medium">₹{payment.amount}</p>
+                    <p className="text-gray-800 font-medium">₹{payment.amount}</p>
                     <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white mt-1">
-                      Pay Now
+                      भुगतान करें
                     </Button>
                   </div>
                 </div>
@@ -166,6 +180,28 @@ const Dashboard = () => {
             </Card>
           ))}
         </div>
+      </div>
+
+      {/* Rewards Section */}
+      <div className="px-6 mt-6 mb-4">
+        <Card className="border-0 shadow-sm bg-gradient-to-r from-purple-50 to-pink-50">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                  <Gift className="w-6 h-6 text-purple-600" />
+                </div>
+                <div>
+                  <h4 className="text-gray-800 font-medium">रोज़ाना रिवार्ड</h4>
+                  <p className="text-sm text-gray-500">Daily rewards available</p>
+                </div>
+              </div>
+              <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                Claim
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
