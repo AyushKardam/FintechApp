@@ -8,6 +8,11 @@ import { Language } from '@/types';
 import { Volume2, Check } from 'lucide-react';
 
 const languages: Language[] = [
+  { code: 'hi', name: 'Hindi', nativeName: 'हिंदी', flag: '🇮🇳' },
+  { code: 'bn', name: 'Bengali', nativeName: 'বাংলা', flag: '🇧🇩' },
+  { code: 'ta', name: 'Tamil', nativeName: 'தமিழ্', flag: '🇮🇳' },
+  { code: 'te', name: 'Telugu', nativeName: 'తెలుగు', flag: '🇮🇳' },
+  { code: 'mr', name: 'Marathi', nativeName: 'मराठी', flag: '🇮🇳' },
   { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
 ];
 
@@ -34,7 +39,7 @@ const LanguageSelection = () => {
             Choose Your Language
           </h1>
           <p className="text-gray-400">
-            Select your preferred language
+            अपनी भाषा चुनें | Select your preferred language
           </p>
         </div>
 
@@ -82,7 +87,7 @@ const LanguageSelection = () => {
           onClick={handleContinue}
           className="w-full bg-gradient-to-r from-cred-purple to-cred-purple/80 hover:from-cred-purple/90 hover:to-cred-purple text-white h-14 text-lg"
         >
-          Continue
+          Continue • जारी रखें
         </Button>
       </div>
     </div>

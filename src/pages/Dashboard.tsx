@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,16 +22,49 @@ import { useApp } from '@/contexts/AppContext';
 import LanguageSelector from '@/components/LanguageSelector';
 
 const Dashboard = () => {
-  const { user, walletBalance, savingsGoals } = useApp();
+  const { user, walletBalance, savingsGoals, selectedLanguage } = useApp();
+  const isEnglish = selectedLanguage.code === 'en';
+  
   const [upcomingPayments] = useState([
-    { name: 'Mobile Recharge', amount: 199, dueDate: 'कल', icon: '📱' },
-    { name: 'Electricity Bill', amount: 850, dueDate: '3 दिन में', icon: '💡' }
+    { 
+      name: isEnglish ? 'Mobile Recharge' : 'Mobile Recharge', 
+      amount: 199, 
+      dueDate: isEnglish ? 'Tomorrow' : 'कल', 
+      icon: '📱' 
+    },
+    { 
+      name: isEnglish ? 'Electricity Bill' : 'Electricity Bill', 
+      amount: 850, 
+      dueDate: isEnglish ? 'In 3 days' : '3 दिन में', 
+      icon: '💡' 
+    }
   ]);
 
   const quickActions = [
-    { id: 'loan', icon: '📥', label: 'लोन लें', sublabel: 'Get Loan', color: 'bg-blue-50 text-blue-600', route: '/loan' },
-    { id: 'save', icon: '💰', label: 'पैसे बचाएं', sublabel: 'Save Money', color: 'bg-green-50 text-green-600', route: '/savings' },
-    { id: 'insure', icon: '🛡️', label: 'बीमा लें', sublabel: 'Get Insurance', color: 'bg-purple-50 text-purple-600', route: '/insurance' },
+    { 
+      id: 'loan', 
+      icon: '📥', 
+      label: isEnglish ? 'Get Loan' : 'लोन लें', 
+      sublabel: 'Get Loan', 
+      color: 'bg-blue-50 text-blue-600', 
+      route: '/loan' 
+    },
+    { 
+      id: 'save', 
+      icon: '💰', 
+      label: isEnglish ? 'Save Money' : 'पैसे बचाएं', 
+      sublabel: 'Save Money', 
+      color: 'bg-green-50 text-green-600', 
+      route: '/savings' 
+    },
+    { 
+      id: 'insure', 
+      icon: '🛡️', 
+      label: isEnglish ? 'Get Insurance' : 'बीमा लें', 
+      sublabel: 'Get Insurance', 
+      color: 'bg-purple-50 text-purple-600', 
+      route: '/insurance' 
+    },
   ];
 
   const currentSavingsGoal = savingsGoals[0];
@@ -46,9 +80,11 @@ const Dashboard = () => {
             </div>
             <div>
               <h1 className="text-lg font-semibold text-white">
-                नमस्ते, {user?.name || 'साथी'}
+                {isEnglish ? `Hello, ${user?.name || 'Friend'}` : `नमस्ते, ${user?.name || 'साथी'}`}
               </h1>
-              <p className="text-sm text-green-100">आपका पैसा साथी • PaisaSathi</p>
+              <p className="text-sm text-green-100">
+                {isEnglish ? 'Your Money Partner • PaisaSathi' : 'आपका पैसा साथी • PaisaSathi'}
+              </p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -67,11 +103,13 @@ const Dashboard = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-green-100 mb-1">मेरा वॉलेट • My Wallet</p>
+                <p className="text-sm text-green-100 mb-1">
+                  {isEnglish ? 'My Wallet' : 'मेरा वॉलेट • My Wallet'}
+                </p>
                 <h2 className="text-3xl font-bold text-white">₹{walletBalance.toLocaleString()}</h2>
                 <p className="text-sm text-green-200 flex items-center mt-2">
                   <TrendingUp className="w-4 h-4 mr-1" />
-                  इस हफ्ते +₹150
+                  {isEnglish ? 'This week +₹150' : 'इस हफ्ते +₹150'}
                 </p>
               </div>
               <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
@@ -93,7 +131,9 @@ const Dashboard = () => {
 
       {/* Quick Actions */}
       <div className="px-6 mt-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">त्वरित सेवाएं • Quick Services</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          {isEnglish ? 'Quick Services' : 'त्वरित सेवाएं • Quick Services'}
+        </h3>
         <div className="grid grid-cols-3 gap-4">
           {quickActions.map((action) => (
             <Card key={action.id} className="hover:shadow-md transition-all duration-300 cursor-pointer border-0 shadow-sm">
@@ -102,7 +142,7 @@ const Dashboard = () => {
                   {action.icon}
                 </div>
                 <p className="text-sm font-semibold text-gray-800">{action.label}</p>
-                <p className="text-xs text-gray-500">{action.sublabel}</p>
+                {!isEnglish && <p className="text-xs text-gray-500">{action.sublabel}</p>}
               </CardContent>
             </Card>
           ))}
@@ -113,9 +153,11 @@ const Dashboard = () => {
       {currentSavingsGoal && (
         <div className="px-6 mt-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-800">बचत लक्ष्य • Savings Goal</h3>
+            <h3 className="text-lg font-semibold text-gray-800">
+              {isEnglish ? 'Savings Goal' : 'बचत लक्ष्य • Savings Goal'}
+            </h3>
             <Button variant="ghost" size="sm" className="text-green-600">
-              सभी देखें
+              {isEnglish ? 'View All' : 'सभी देखें'}
               <ArrowUpRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
@@ -146,7 +188,7 @@ const Dashboard = () => {
               </div>
               <Button size="sm" className="w-full mt-3 bg-green-600 hover:bg-green-700">
                 <Plus className="w-4 h-4 mr-2" />
-                ₹100 जोड़ें
+                {isEnglish ? 'Add ₹100' : '₹100 जोड़ें'}
               </Button>
             </CardContent>
           </Card>
@@ -155,7 +197,9 @@ const Dashboard = () => {
 
       {/* Upcoming Payments */}
       <div className="px-6 mt-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">आने वाले भुगतान • Upcoming Payments</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          {isEnglish ? 'Upcoming Payments' : 'आने वाले भुगतान • Upcoming Payments'}
+        </h3>
         <div className="space-y-3">
           {upcomingPayments.map((payment, index) => (
             <Card key={index} className="border-0 shadow-sm">
@@ -173,7 +217,7 @@ const Dashboard = () => {
                   <div className="text-right">
                     <p className="text-gray-800 font-medium">₹{payment.amount}</p>
                     <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white mt-1">
-                      भुगतान करें
+                      {isEnglish ? 'Pay Now' : 'भुगतान करें'}
                     </Button>
                   </div>
                 </div>
@@ -193,7 +237,9 @@ const Dashboard = () => {
                   <Gift className="w-6 h-6 text-purple-600" />
                 </div>
                 <div>
-                  <h4 className="text-gray-800 font-medium">रोज़ाना रिवार्ड</h4>
+                  <h4 className="text-gray-800 font-medium">
+                    {isEnglish ? 'Daily Rewards' : 'रोज़ाना रिवार्ड'}
+                  </h4>
                   <p className="text-sm text-gray-500">Daily rewards available</p>
                 </div>
               </div>
