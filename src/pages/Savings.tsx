@@ -104,24 +104,24 @@ const Savings = () => {
                 {isEnglish ? 'Create New Goal' : 'नया लक्ष्य बनाएं'}
               </Button> : <Card className="border-0 shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-gray-800 mb-4">
+                  <h3 className="font-semibold mb-4 text-gray-100">
                     {isEnglish ? 'New Savings Goal' : 'नया बचत लक्ष्य'}
                   </h3>
                   <div className="space-y-4">
                     <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">
+                      <label className="text-sm font-medium text-gray-200 mb-2 block">
                         {isEnglish ? 'Goal Name' : 'लक्ष्य का नाम'}
                       </label>
                       <Input placeholder={isEnglish ? 'e.g: Festival Fund' : 'जैसे: त्योहार फंड'} value={newGoalName} onChange={e => setNewGoalName(e.target.value)} className="border-green-200 focus:border-green-400" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">
+                      <label className="text-sm font-medium text-gray-200 mb-2 block">
                         {isEnglish ? 'Target Amount' : 'लक्ष्य राशि'}
                       </label>
                       <Input type="number" placeholder="₹5,000" value={newGoalAmount} onChange={e => setNewGoalAmount(e.target.value)} className="border-green-200 focus:border-green-400" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">
+                      <label className="text-sm font-medium text-gray-200 mb-2 block">
                         {isEnglish ? 'Choose Icon' : 'आइकन चुनें'}
                       </label>
                       <div className="grid grid-cols-8 gap-2">
