@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { User, Language, LoanApplication, SavingsGoal, InsuranceProduct } from '@/types';
 
@@ -30,10 +29,10 @@ export const useApp = () => {
 };
 
 const defaultLanguage: Language = {
-  code: 'hi',
-  name: 'Hindi',
-  nativeName: 'हिंदी',
-  flag: '🇮🇳'
+  code: 'en',
+  name: 'English',
+  nativeName: 'English',
+  flag: '🇬🇧'
 };
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

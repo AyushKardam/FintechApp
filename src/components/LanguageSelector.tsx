@@ -14,11 +14,6 @@ import { Language } from '@/types';
 import { useNavigate } from 'react-router-dom';
 
 const languages: Language[] = [
-  { code: 'hi', name: 'Hindi', nativeName: 'हिंदी', flag: '🇮🇳' },
-  { code: 'bn', name: 'Bengali', nativeName: 'বাংলা', flag: '🇧🇩' },
-  { code: 'ta', name: 'Tamil', nativeName: 'தமிழ்', flag: '🇮🇳' },
-  { code: 'te', name: 'Telugu', nativeName: 'తెలుగు', flag: '🇮🇳' },
-  { code: 'mr', name: 'Marathi', nativeName: 'मराठी', flag: '🇮🇳' },
   { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧' },
 ];
 
