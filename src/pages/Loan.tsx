@@ -127,7 +127,7 @@ const Loan = () => {
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="flex items-center space-x-4 mb-6">
-          <Button variant="ghost" size="icon" onClick={() => step === 1 ? navigate('/dashboard') : setStep(1)} className="rounded-full">
+          <Button variant="ghost" size="icon" onClick={() => step === 1 ? navigate('/dashboard') : setStep(1)} className="rounded-full bg-amber-400 hover:bg-amber-300">
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>
