@@ -53,14 +53,14 @@ const Dashboard = () => {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-xl text-white font-bold">
-              {user?.name?.charAt(0) || 'P'}
+              {user?.name?.charAt(0) || 'A'}
             </div>
             <div>
               <h1 className="text-lg font-semibold text-white">
                 {isEnglish ? `Hello, ${user?.name || 'Friend'}` : `नमस्ते, ${user?.name || 'साथी'}`}
               </h1>
               <p className="text-sm text-green-100">
-                {isEnglish ? 'Your Money Partner • PaisaSathi' : 'आपका पैसा साथी • PaisaSathi'}
+                {isEnglish ? 'Your Money Partner • Arthik Saathi' : 'आपका पैसा साथी • Arthik Saathi'}
               </p>
             </div>
           </div>
