@@ -15,7 +15,7 @@ const KYC = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    aadhaar: '',
+    pan: '',
     otp: ''
   });
   const [otpSent, setOtpSent] = useState(false);
@@ -26,7 +26,7 @@ const KYC = () => {
 
   const sendOTP = () => {
     setOtpSent(true);
-    console.log('OTP sent to Aadhaar-linked mobile');
+    console.log('OTP sent to registered mobile');
   };
 
   const verifyOTP = () => {
@@ -36,7 +36,7 @@ const KYC = () => {
       name: formData.name,
       phone: formData.phone,
       language: selectedLanguage.code,
-      aadhaarVerified: true,
+      aadhaarVerified: true, // Keep this field name for compatibility but it represents PAN verification now
       communityScore: 725
     };
     
@@ -66,7 +66,7 @@ const KYC = () => {
             Quick Verification
           </h1>
           <p className="text-gray-400">
-            Secure your account with Aadhaar OTP
+            Secure your account with PAN card verification
           </p>
         </div>
 
@@ -105,16 +105,16 @@ const KYC = () => {
               <div className="space-y-6">
                 <div>
                   <label className="text-white text-sm font-medium mb-2 block">
-                    Aadhaar Number
+                    PAN Card Number
                   </label>
                   <div className="relative">
                     <CreditCard className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                     <Input
-                      placeholder="XXXX XXXX XXXX"
-                      value={formData.aadhaar}
-                      onChange={(e) => handleInputChange('aadhaar', e.target.value)}
+                      placeholder="ABCDE1234F"
+                      value={formData.pan}
+                      onChange={(e) => handleInputChange('pan', e.target.value.toUpperCase())}
                       className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 pl-12"
-                      maxLength={12}
+                      maxLength={10}
                     />
                   </div>
                 </div>
@@ -133,7 +133,7 @@ const KYC = () => {
                     />
                     <p className="text-green-400 text-xs mt-2 flex items-center">
                       <CheckCircle className="w-3 h-3 mr-1" />
-                      OTP sent to Aadhaar-linked mobile
+                      OTP sent to registered mobile
                     </p>
                   </div>
                 )}
@@ -146,7 +146,7 @@ const KYC = () => {
           onClick={handleContinue}
           disabled={
             (step === 1 && (!formData.name || !formData.phone)) ||
-            (step === 2 && !formData.aadhaar) ||
+            (step === 2 && !formData.pan) ||
             (otpSent && !formData.otp)
           }
           className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white h-14 text-lg disabled:opacity-50"
@@ -161,7 +161,7 @@ const KYC = () => {
 
         <div className="mt-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
           <p className="text-blue-400 text-xs">
-            🔒 Your Aadhaar data is encrypted and never stored. We only verify your identity for security.
+            🔒 Your PAN card data is encrypted and never stored. We only verify your identity for security.
           </p>
         </div>
       </div>
